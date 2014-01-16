@@ -1,1 +1,7 @@
 E:\Class\Saran\MatrixManipulation\MatrixManipulation\bin\Debug\MatrixManipulation.exe.config
+C:\Users\Mani\Documents\GitHub\Batch0\Saran\MatrixManipulation\MatrixManipulation\bin\Debug\MatrixManipulation.exe.config
+C:\Users\Mani\Documents\GitHub\Batch0\Saran\MatrixManipulation\MatrixManipulation\bin\Debug\MatrixManipulation.exe
+C:\Users\Mani\Documents\GitHub\Batch0\Saran\MatrixManipulation\MatrixManipulation\bin\Debug\MatrixManipulation.pdb
+C:\Users\Mani\Documents\GitHub\Batch0\Saran\MatrixManipulation\MatrixManipulation\obj\Debug\MatrixManipulation.csprojResolveAssemblyReference.cache
+C:\Users\Mani\Documents\GitHub\Batch0\Saran\MatrixManipulation\MatrixManipulation\obj\Debug\MatrixManipulation.exe
+C:\Users\Mani\Documents\GitHub\Batch0\Saran\MatrixManipulation\MatrixManipulation\obj\Debug\MatrixManipulation.pdb
