@@ -10,6 +10,7 @@ namespace MatrixManipulation
     {
         public static void main(string[] args)
         {
+			//Adding test command.
             int[,] matrix1 = new int[3, 3]
             {
                 {3,5,6},
