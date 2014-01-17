@@ -8,4 +8,4 @@ Hello from Local Change
 
 Hello from GitHub.com
 
-Hello again from GitHub.com!
+Hello again from GitHub.com-
