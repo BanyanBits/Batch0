@@ -10,7 +10,7 @@ namespace TestIgnoreFiles
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Booya");
+            Console.WriteLine("Booya From GitHub.com");
         }
     }
 }
