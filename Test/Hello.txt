@@ -1,6 +1,3 @@
-<<<<<<< HEAD
 Hello Noah, How are you? How old are you? 
 I am fine, I am 15 months old.
-=======
-Hello Noah, How are you? How old are you?ya Fine.hjgskdkjfoishf
->>>>>>> 2728514f681f79b77dbab97732c62863db689029
+Hello Noah, How are you? How old are you
