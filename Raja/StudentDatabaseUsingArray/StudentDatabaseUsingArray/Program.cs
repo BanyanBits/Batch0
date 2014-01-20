@@ -18,7 +18,7 @@ namespace StudentDatabaseUsingArray
              
             // Retrive Student Info
             db.PrintAllStudentInfo();
-            db.PrintStudentNameById();
+            db.PrintStudentNameById();        
             
 
 
