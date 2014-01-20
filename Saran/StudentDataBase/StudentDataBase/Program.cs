@@ -20,6 +20,7 @@ namespace StudentDataBase
             db.PrintAllStudentInfo();
             db.StudentTotalMarkAndAverage();
             db.MaxMarkOfStudent();
+            db.MinimumMarkOfStudent();
             db.PrintStudentNameById();
 
         }

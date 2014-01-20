@@ -32,8 +32,8 @@ namespace StudentDataBase
             Console.WriteLine("*** ******* **********\n");
 
             Console.WriteLine("\n Id\tName\tMark1\tMark2\tMark3");
-            Console.WriteLine(" **\t****\t*****\t*****\t*****\n"); 
-                
+            Console.WriteLine(" **\t****\t*****\t*****\t*****\n");
+
             for (int i = 0; i < AddedStudentRecord; i++)
             {
                 Console.WriteLine(" {0}\t{1}\t{2}\t{3}\t{4}", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4]);
@@ -45,15 +45,16 @@ namespace StudentDataBase
             string StudentId;
             Console.Write("\nEnter the Student Id: ");
             StudentId = (Console.ReadLine());
+            Console.WriteLine("\n\n Id\t Name\t Mark1 \t Mark2\t Mark3");
             for (int i = 0; i < AddedStudentRecord; i++)
             {
                 if (students[i, 0] == StudentId)
                 {
-                    Console.WriteLine("Id:{0},Name:{1},Mark1:{2},Mark2:{3},Mark3:{4}", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4]);
+                    Console.WriteLine("\n {0}\t {1}\t {2}\t {3}\t {4}", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4]);
                 }
             }
             Console.WriteLine("Enter the Student Valid Id Number");
-            
+
         }
 
         public void StudentTotalMarkAndAverage()
@@ -82,23 +83,43 @@ namespace StudentDataBase
                 int mark3 = Convert.ToInt32(students[i, 4]);
 
                 if (mark1 > mark2)
-                {
                     if (mark1 > mark3)
-                    {
                         Console.WriteLine(" {0} \t{1} \t {2}", students[i, 0], students[i, 1], mark1);
-                    }
-                    else if (mark2 > mark3)
-                    {
-                        Console.WriteLine(" Id \t Nmae \t Maximum Mark of subject");
-                        Console.WriteLine(" {0} \t{1} \t {2}", students[i, 0], students[i, 1], mark2);
-                    }
-                }
+
+                if (mark2 > mark3)
+                    Console.WriteLine(" {0} \t{1} \t {2}", students[i, 0], students[i, 1], mark2);
+
                 else
-                {
                     Console.WriteLine(" {0} \t{1} \t {2}", students[i, 0], students[i, 1], mark3);
-                }
+
             }
         }
+
+        public void MinimumMarkOfStudent()
+        {
+            Console.WriteLine("\n\n Id \t Name \t MinimumOfMark");
+            Console.WriteLine(" **\t ****\t *************");
+
+            for (int i = 0; i < AddedStudentRecord; i++)
+            {
+                int mark1 = Convert.ToInt32(students[i, 2]);
+                int mark2 = Convert.ToInt32(students[i, 3]);
+                int mark3 = Convert.ToInt32(students[i, 4]);
+
+                if (mark1 < mark2)                
+                    if (mark1 < mark3)                    
+                        Console.WriteLine(" {0} \t{1} \t {2}", students[i, 0], students[i, 1], mark1);
+                    
+                    else if (mark2 < mark3)                 
+                       
+                        Console.WriteLine(" {0} \t{1} \t {2}", students[i, 0], students[i, 1], mark2);                    
+                
+                else                
+                    Console.WriteLine(" {0} \t{1} \t {2}", students[i, 0], students[i, 1], mark3);
+                
+            }
+        }
+
 
 
 
