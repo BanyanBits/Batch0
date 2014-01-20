@@ -106,18 +106,45 @@ namespace StudentDataBase
                 int mark2 = Convert.ToInt32(students[i, 3]);
                 int mark3 = Convert.ToInt32(students[i, 4]);
 
-                if (mark1 < mark2)                
-                    if (mark1 < mark3)                    
+                if (mark1 < mark2)
+                    if (mark1 < mark3)
                         Console.WriteLine(" {0} \t{1} \t {2}", students[i, 0], students[i, 1], mark1);
-                    
-                    else if (mark2 < mark3)                 
-                       
-                        Console.WriteLine(" {0} \t{1} \t {2}", students[i, 0], students[i, 1], mark2);                    
-                
-                else                
-                    Console.WriteLine(" {0} \t{1} \t {2}", students[i, 0], students[i, 1], mark3);
-                
+
+                    else if (mark2 < mark3)
+
+                        Console.WriteLine(" {0} \t{1} \t {2}", students[i, 0], students[i, 1], mark2);
+
+                    else
+                        Console.WriteLine(" {0} \t{1} \t {2}", students[i, 0], students[i, 1], mark3);
+
             }
+        }
+
+
+        public void PassOrFail()
+        {
+            string result;
+            Console.WriteLine("\n\n Id\t Name \t Result");
+            Console.WriteLine(" **\t **** \t ******\n");
+            for (int i = 0; i < AddedStudentRecord; i++)
+            {
+                int mark1 = Convert.ToInt32(students[i, 2]);
+                int mark2 = Convert.ToInt32(students[i, 3]);
+                int mark3 = Convert.ToInt32(students[i, 4]);
+
+                if (mark1 >= 40 && mark2 >= 40 && mark3 >= 40)
+                {
+                    result = "Pass";
+                    Console.WriteLine(" {0} \t {1} \t {2}", students[i, 0], students[i, 1],result);
+                }
+                else
+                {
+                    result = "Fail";
+                    Console.WriteLine(" {0} \t {1} \t {2}", students[i, 0], students[i, 1],result);
+                }
+            }
+
+
         }
 
 

@@ -22,6 +22,7 @@ namespace StudentDataBase
             db.MaxMarkOfStudent();
             db.MinimumMarkOfStudent();
             db.PrintStudentNameById();
+            db.PassOrFail();
 
         }
     }
