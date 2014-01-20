@@ -186,12 +186,12 @@ namespace StudentDatabaseUsingArray
                     Console.WriteLine("S Grade");
                 }
 
-                if (mark2 <=60 && mark2 >=70)
+                if (mark2 <= 60 && mark2 >= 70)
                 {
                     Console.WriteLine("c Grade");
                 }
 
-                else if (mark2 < 71 && mark2 >=80)
+                else if (mark2 < 71 && mark2 >= 80)
                 {
                     Console.WriteLine(" B Grade");
                 }
@@ -225,8 +225,6 @@ namespace StudentDatabaseUsingArray
                 {
                     Console.WriteLine("S Grade");
                 }
-
-
             }
 
         }
