@@ -30,16 +30,20 @@ namespace StudentDataBase
         {
             Console.WriteLine("\t\nAll Student Infomatiom");
             Console.WriteLine("*** ******* **********\n");
+
+            Console.WriteLine("\n Id\tName\tMark1\tMark2\tMark3");
+            Console.WriteLine(" **\t****\t*****\t*****\t*****\n"); 
+                
             for (int i = 0; i < AddedStudentRecord; i++)
             {
-                Console.WriteLine("Id:{0},Name:{1},Mark1:{2},Mark2:{3},Mark3:{4}", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4]);
+                Console.WriteLine(" {0}\t{1}\t{2}\t{3}\t{4}", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4]);
             }
         }
 
         public void PrintStudentNameById()
         {
             string StudentId;
-            Console.WriteLine("Enter the Student Id:");
+            Console.Write("\nEnter the Student Id: ");
             StudentId = (Console.ReadLine());
             for (int i = 0; i < AddedStudentRecord; i++)
             {
@@ -49,23 +53,55 @@ namespace StudentDataBase
                 }
             }
             Console.WriteLine("Enter the Student Valid Id Number");
-
-
-
-
+            
         }
 
-        public void StudentTotalMark()
+        public void StudentTotalMarkAndAverage()
         {
+            Console.WriteLine("\n\n Id\tName\tMark1\tMark2\tMark3\tTotal\tAverage");
+            Console.WriteLine(" **\t****\t*****\t*****\t*****\t*****\t*******\n");
             for (int i = 0; i < AddedStudentRecord; i++)
             {
                 int total = Convert.ToInt32(students[i, 2]) + Convert.ToInt32(students[i, 3]) + Convert.ToInt32(students[i, 4]);
                 float average = total / 3;
-                Console.WriteLine("Id:{0},Name:{1},Mark1:{2},Mark2:{3},Mark3:{4},Total : {5},Average : {6}", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4], total, average);
+                Console.WriteLine(" {0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4], total, average);
 
             }
 
         }
+
+        public void MaxMarkOfStudent()
+        {
+            Console.WriteLine("\n\n Id \t Name \t MaximumMark");
+            Console.WriteLine(" **\t ****\t ***********");
+
+            for (int i = 0; i < AddedStudentRecord; i++)
+            {
+                int mark1 = Convert.ToInt32(students[i, 2]);
+                int mark2 = Convert.ToInt32(students[i, 3]);
+                int mark3 = Convert.ToInt32(students[i, 4]);
+
+                if (mark1 > mark2)
+                {
+                    if (mark1 > mark3)
+                    {
+                        Console.WriteLine(" {0} \t{1} \t {2}", students[i, 0], students[i, 1], mark1);
+                    }
+                    else if (mark2 > mark3)
+                    {
+                        Console.WriteLine(" Id \t Nmae \t Maximum Mark of subject");
+                        Console.WriteLine(" {0} \t{1} \t {2}", students[i, 0], students[i, 1], mark2);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine(" {0} \t{1} \t {2}", students[i, 0], students[i, 1], mark3);
+                }
+            }
+        }
+
+
+
 
     }
 }

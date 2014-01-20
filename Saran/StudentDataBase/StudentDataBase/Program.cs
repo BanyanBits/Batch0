@@ -18,11 +18,11 @@ namespace StudentDataBase
 
             // Retrive Student Info
             db.PrintAllStudentInfo();
+            db.StudentTotalMarkAndAverage();
+            db.MaxMarkOfStudent();
             db.PrintStudentNameById();
-            db.StudentTotalMark();
 
         }
     }
 }
 
-    
