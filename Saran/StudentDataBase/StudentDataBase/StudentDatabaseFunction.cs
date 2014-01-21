@@ -188,7 +188,30 @@ namespace StudentDataBase
             }
             Console.WriteLine("\n\nEnter the Student Valid Address");
             Console.WriteLine();
-        }        
+        }
 
+        public void FindStudentFirstMark()
+        {
+            int temp = 0;
+            int i;
+            int[] rank = new int[AddedStudentRecord];
+            Console.WriteLine("\t\t The State First Rank");
+            Console.WriteLine("\t\t *** ***** ***** ****\n\n");
+                        
+            for ( i = 0; i < AddedStudentRecord; i++)
+            {
+                int total = Convert.ToInt32(students[i, 2]) + Convert.ToInt32(students[i, 3]) + Convert.ToInt32(students[i, 4]);
+                rank[i] = total;
+            }
+
+            foreach (int total in rank)
+            {
+                if (temp < total)
+                    temp = total;
+            }
+            Console.WriteLine("The State First Mark is : {0} ",temp);
+
+        }
+        
     }
 }

@@ -22,13 +22,14 @@ namespace StudentDataBase
 
             // Retrive Student Info
 
-            db.PrintAllStudentInfo();
-            db.StudentTotalMarkAndAverage();
-            db.MaxMarkOfStudent();
-            db.MinimumMarkOfStudent();
-            db.PrintStudentNameById();
-            db.PassOrFail();
-            db.FindStudentByMark();
+            //db.PrintAllStudentInfo();
+            //db.StudentTotalMarkAndAverage();
+            //db.MaxMarkOfStudent();
+            //db.MinimumMarkOfStudent();
+            //db.PrintStudentNameById();
+            //db.PassOrFail();
+            //db.FindStudentByMark();
+            db.FindStudentFirstMark();
 
         }
     }
