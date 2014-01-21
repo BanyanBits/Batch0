@@ -10,7 +10,7 @@ namespace TestProject
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Test Message to demo conflicts");
+            Console.WriteLine("Create conflicts");
             Console.WriteLine("new modified document");
         }
     }
