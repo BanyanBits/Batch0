@@ -12,9 +12,9 @@ namespace StudentDataBase
         {
             // Store Student Info
             StudentDatabaseFunction db = new StudentDatabaseFunction(4);
-            db.AddStudent(1, "Saran", 43, 76, 98);
+            db.AddStudent(1, "Saran", 99, 76, 98);
             db.AddStudent(2, "Raja", 54, 79, 32);
-            db.AddStudent(3, "raj", 54, 60, 45);
+            db.AddStudent(3, "Raj", 54, 60, 75);
 
             // Retrive Student Info
             db.PrintAllStudentInfo();
@@ -23,7 +23,6 @@ namespace StudentDataBase
             db.MinimumMarkOfStudent();
             db.PrintStudentNameById();
             db.PassOrFail();
-
         }
     }
 }
