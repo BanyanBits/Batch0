@@ -11,18 +11,25 @@ namespace StudentDataBase
         static void Main(string[] args)
         {
             // Store Student Info
-            StudentDatabaseFunction db = new StudentDatabaseFunction(4);
-            db.AddStudent(1, "Saran", 99, 76, 98);
-            db.AddStudent(2, "Raja", 54, 79, 32);
-            db.AddStudent(3, "Raj", 54, 60, 75);
+
+            StudentDatabaseFunction db = new StudentDatabaseFunction(6);
+            db.AddStudent(1, "Saran", 54, 76, 98,"Salem");
+            db.AddStudent(2, "Raja", 45, 79, 32,"Thrchy");
+            db.AddStudent(3, "Raj", 87, 60, 45,"Chennai");
+            db.AddStudent(1, "Ram", 43, 76, 98, "Salem");
+            db.AddStudent(2, "Muthu", 90, 79, 32, "Thrchy");
+            db.AddStudent(3, "Mani", 54, 60, 45, "Chennai");
 
             // Retrive Student Info
-            db.PrintAllStudentInfo();
-            db.StudentTotalMarkAndAverage();
-            db.MaxMarkOfStudent();
-            db.MinimumMarkOfStudent();
-            db.PrintStudentNameById();
-            db.PassOrFail();
+
+            //db.PrintAllStudentInfo();
+            //db.StudentTotalMarkAndAverage();
+            //db.MaxMarkOfStudent();
+            //db.MinimumMarkOfStudent();
+            //db.PrintStudentNameById();
+            //db.PassOrFail();
+            db.FindStudentByMark();
+
         }
     }
 }
