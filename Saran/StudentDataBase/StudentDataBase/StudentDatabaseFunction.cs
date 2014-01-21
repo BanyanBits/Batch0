@@ -163,13 +163,32 @@ namespace StudentDataBase
                 if ((students[i, 2] == mark) || (students[i, 3] == mark) || (students[i, 4] == mark))
                 {
                     Console.WriteLine(" {0}\t {1}\t {2}\t {3}\t {4} \t {5}", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4], students[i, 5]);
-
                 }
             }
             Console.WriteLine("Enter the Student Valid Mark");
         }
 
+        public void FindStudentByAddress()
+        {
+            Console.WriteLine("\n\t\t To Find Student By Address");
+            Console.WriteLine("\t\t ** **** ******* ** *******\n");
 
+            Console.Write("Enter the Student Addresss : ");
+            string address = Console.ReadLine();
+
+            Console.WriteLine("\n Id \t Name \t Address");
+            Console.WriteLine(" ** \t **** \t *******");
+
+            for (int i = 0; i < AddedStudentRecord; i++)
+            {
+                if (students[i, 5] == address)
+                {
+                    Console.WriteLine(" {0}\t {1}\t {2} ", students[i, 0], students[i, 1], students[i, 5]);
+                }
+            }
+            Console.WriteLine("\n\nEnter the Student Valid Address");
+            Console.WriteLine();
+        }        
 
     }
 }
