@@ -248,45 +248,49 @@ namespace StudentDataBase
 
         public void FindTopStudentEachDistrict()
         {
+            int temp = 0;
+            int student = 0;
+            int noOfStudentDistrict = 0;
             string[] district = new string[100];
             int n = 0;
-            
+            int i = 0;
 
-            for (int i = 0; i < addedStudentRecord; i++)
+            Console.WriteLine("\n\t\t To Find Student All District");
+            Console.WriteLine("\t\t ** **** ******* *** ********\n");
+
+            Console.WriteLine("\n\t Id \t Name \t Mark1 \t Mark2 \t Mark3 \t HighestMark \t District ");
+            Console.WriteLine("\t ** \t **** \t ***** \t ***** \t ***** \t ************ \t ******** ");
+            district[n] = students[i, 5];
+
+            for (i = 0; i < addedStudentRecord; i++)
             {
-                district[n] = students[i, 5];
 
-                if (students[i, 5] == district[n])
+                if (students[i, 5] == students[i+1, 5])
                 {
-                    int temp = 0;
-                    int student = 0;
-                    int noOfStudentDistrict = 0;
-
-                    Console.WriteLine("\n\t\t To Find Student All District");
-                    Console.WriteLine("\t\t ** **** ******* *** ********\n");
-
-                    Console.WriteLine("\n\t Id \t Name \t Mark1 \t Mark2 \t Mark3 \t HighestMark \t District ");
-                    Console.WriteLine("\t ** \t **** \t ***** \t ***** \t ***** \t ************ \t ******** ");
-
-                    for (int j = 0; j < addedStudentRecord; j++)
+                    noOfStudentDistrict++;
+                    int total = Convert.ToInt32(students[i, 2]) + Convert.ToInt32(students[i, 3]) + Convert.ToInt32(students[i, 4]);
+                    if (temp < total)
                     {
-
-                        noOfStudentDistrict++;
-                        int total = Convert.ToInt32(students[i, 2]) + Convert.ToInt32(students[i, 3]) + Convert.ToInt32(students[i, 4]);
-                        if (temp < total)
-                        {
-                            temp = total;
-                            student = j;
-                        }
-
+                        temp = total;
+                        student = i;
                     }
-                    Console.WriteLine("\t {0} \t {1} \t {2} \t {3} \t {4} \t {5} \t\t {6}", students[student, 0], students[student, 1], students[student, 2], students[student, 3], students[student, 4], temp, students[student, 5]);
-                    Console.WriteLine("\n The Number Of Student is : {0} ", noOfStudentDistrict);
-                    n++;
-                    continue;
-
 
                 }
+                n++;
+                Console.WriteLine("\t {0} \t {1} \t {2} \t {3} \t {4} \t {5} \t\t {6}", students[student, 0], students[student, 1], students[student, 2], students[student, 3], students[student, 4], temp, students[student, 5]);
+                Console.WriteLine("\n The Number Of Student is : {0} ", noOfStudentDistrict);
+
+            }
+        }
+
+        public void FindDistrict()
+        {
+            int[] district = new int[100];
+            int i;
+              
+            if(students[i,5])
+            {
+
             }
         }
 
