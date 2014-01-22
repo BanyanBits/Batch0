@@ -4,7 +4,7 @@ Batch0
 Student Database
 ==================
 
-- Find students with matching mark in any subject
+1. Find students with matching mark in any subject
 - Find top student in given district.
 - Find top student in each district
 - Find student with highest total
