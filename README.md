@@ -1,4 +1,11 @@
 Batch0
 ======
 
-Batch0 Raja &amp; Saran
+Student Database
+==================
+
+- Find students with matching mark in any subject
+- Find top student in each district
+- Find student with highest total
+- Find students with given mark range
+- Find number of students in each district
