@@ -193,25 +193,57 @@ namespace StudentDataBase
         public void FindStudentFirstMark()
         {
             int temp = 0;
-            int i;
-            int[] rank = new int[AddedStudentRecord];
+            int student = 0;
+
             Console.WriteLine("\t\t The State First Rank");
             Console.WriteLine("\t\t *** ***** ***** ****\n\n");
-                        
-            for ( i = 0; i < AddedStudentRecord; i++)
+            Console.WriteLine("\t Id \t Name \t Mark1 \t Mark2 \t Mark3 \t HighestMark \t Districk ");
+            Console.WriteLine("\t ** \t **** \t ***** \t ***** \t ***** \t *********** \t ********\n");
+
+            for (int i = 0; i < AddedStudentRecord; i++)
             {
                 int total = Convert.ToInt32(students[i, 2]) + Convert.ToInt32(students[i, 3]) + Convert.ToInt32(students[i, 4]);
-                rank[i] = total;               
-            }
 
-            foreach (int total in rank)
-            {
                 if (temp < total)
+                {
                     temp = total;
+                    student = i;
+                }
             }
-            Console.WriteLine("The State First Mark is : {0} ",temp);
+            Console.WriteLine("\t {0} \t {1} \t {2} \t {3} \t {4} \t {5} \t\t {6}", students[student, 0], students[student, 1], students[student, 2], students[student, 3], students[student, 4], temp, students[student, 5]);
+            Console.WriteLine("\n The Number Of Student is : {0} ", AddedStudentRecord);
+        }
+
+        public void FindTopStudentGivenDistrict()
+        {
+            int temp = 0;
+            int student = 0;
+            int noOfStudentDistrict = 0;
+            Console.WriteLine("\n\t\t To Find Top Mark  By District");
+            Console.WriteLine("\t\t ** **** *** **** ** ********\n");
+
+            Console.Write("Enter the District : ");
+            string address = Console.ReadLine();
+
+            Console.WriteLine("\n\t Id \t Name \t Mark1 \t Mark2 \t Mark3 \t HighestMark \t District ");
+            Console.WriteLine("\t ** \t **** \t ***** \t ***** \t ***** \t ************ \t ******** ");
+
+            for (int i = 0; i < AddedStudentRecord; i++)
+            {
+                if (students[i, 5] == address)
+                {
+                    noOfStudentDistrict++;
+                    int total = Convert.ToInt32(students[i, 2]) + Convert.ToInt32(students[i, 3]) + Convert.ToInt32(students[i, 4]);
+                    if (temp < total)
+                    {
+                        temp = total;
+                        student = i;
+                    }
+                }
+            }
+            Console.WriteLine("\t {0} \t {1} \t {2} \t {3} \t {4} \t {5} \t\t {6}", students[student, 0], students[student, 1], students[student, 2], students[student, 3], students[student, 4], temp, students[student, 5]);
+            Console.WriteLine("\n The Number Of Student is : {0} ", noOfStudentDistrict);            
 
         }
-        
     }
 }
