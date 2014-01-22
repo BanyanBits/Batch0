@@ -201,7 +201,7 @@ namespace StudentDataBase
             for ( i = 0; i < AddedStudentRecord; i++)
             {
                 int total = Convert.ToInt32(students[i, 2]) + Convert.ToInt32(students[i, 3]) + Convert.ToInt32(students[i, 4]);
-                rank[i] = total;
+                rank[i] = total;               
             }
 
             foreach (int total in rank)
