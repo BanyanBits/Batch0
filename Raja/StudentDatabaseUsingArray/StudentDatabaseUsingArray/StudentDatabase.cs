@@ -8,55 +8,101 @@ namespace StudentDatabaseUsingArray
 {
     class StudentDatabase
     {
-        string[,] students = new string[2, 5];
-        int AddedStudentRecord = 0;
+        string[,] students;
+        int noOfStudentdAdded = 0;
 
         public StudentDatabase(int totalStudents)
         {
-            students = new string[totalStudents, 5];
+            students = new string[totalStudents, 6];
         }
 
-        public void AddStudent(int id, string name, int mark1, int mark2, int mark3)
+        public void AddStudent(int id, string name, int mark1, int mark2, int mark3, string district)
         {
-            students[AddedStudentRecord, 0] = id.ToString();
-            students[AddedStudentRecord, 1] = name;
-            students[AddedStudentRecord, 2] = mark1.ToString();
-            students[AddedStudentRecord, 3] = mark2.ToString();
-            students[AddedStudentRecord, 4] = mark3.ToString();
-            AddedStudentRecord++;
+            students[noOfStudentdAdded, 0] = id.ToString();
+            students[noOfStudentdAdded, 1] = name;
+            students[noOfStudentdAdded, 2] = mark1.ToString();
+            students[noOfStudentdAdded, 3] = mark2.ToString();
+            students[noOfStudentdAdded, 4] = mark3.ToString();
+            students[noOfStudentdAdded, 5] = district;
+            noOfStudentdAdded++;
         }
 
         public void PrintAllStudentInfo()
         {
             Console.WriteLine("All Student Infomatiom");
             Console.WriteLine("***********************");
-            for (int i = 0; i < AddedStudentRecord; i++)
+            Console.WriteLine("\n\tId\tname\tMark1\tmark2\tmark3\tDistrict");
+            Console.WriteLine("\t***\t*****\t****\t****\t*****\t********");
+            for (int i = 0; i < noOfStudentdAdded; i++)
             {
-                Console.WriteLine("Id:{0},Name:{1},Mark1:{2},Mark2:{3},Mark3:{4}", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4]);
+                Console.WriteLine("\t{0}\t{1}\t{2}\t{3}\t{4}\t{5}", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4], students[i, 5]);
             }
         }
 
         public void PrintStudentNameById()
         {
             string StudentId;
-            Console.WriteLine("Enter the Student Id:");
-            Console.WriteLine("*********************");
+            Console.Write("Enter the Student Id:");
             StudentId = (Console.ReadLine());
-            for (int i = 0; i < AddedStudentRecord; i++)
+            Console.WriteLine("*********************");
+            Console.WriteLine("\n\tId\tName\tMark1\tMark2\tMark3\tDistict");
+            Console.WriteLine("\t***\t*****\t****\t****\t*****\t********");
+            for (int i = 0; i < noOfStudentdAdded; i++)
             {
                 if (students[i, 0] == StudentId)
                 {
-                    Console.WriteLine("Id:{0},Name:{1},Mark1:{2},Mark2:{3},Mark3:{4}", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4]);
+                    Console.WriteLine("\t{0}\t{1}\t{2}\t{3}\t{4}\t{5}", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4], students[i, 5]);
+                    return;
+                }
+            } Console.WriteLine("Enter Valid Id Number");
+
+        }
+        public void printStudentNameByDistrict()
+        {
+            string district;
+            Console.Write("Enter the Student District:");
+            district = Console.ReadLine();
+            Console.WriteLine("************************");
+            Console.WriteLine("\n\tId\tName\tDistict");
+            Console.WriteLine("\t***\t*****\t********");
+            int addedStudentMark = 0;
+            for (int i = 0; i < noOfStudentdAdded; i++)
+            {
+                if (students[i, 5] == district)
+                {
+                    addedStudentMark++;
+                    Console.WriteLine("\t{0}\t{1}\t{2}", students[i, 0], students[i, 1], students[i, 5]);                 
+                    
                 }
             }
+            Console.WriteLine("Enter the Valid Student District");
+        }
 
+
+        public void printStudentNameByMarks()
+        {
+            string studentMark;
+            Console.Write("Enter the Student marks:");
+            studentMark = Console.ReadLine();
+            Console.WriteLine("************************");
+            Console.WriteLine("\n\tId\tName\tMark1\tMark2\tMark3\tDistict");
+            Console.WriteLine("\t***\t*****\t****\t****\t*****\t********");
+            for (int i = 0; i < noOfStudentdAdded; i++)
+            {
+                if ((students[i, 2] == studentMark) || (students[i, 3] == studentMark) || (students[i, 4] == studentMark))
+                {
+                    Console.WriteLine("\t{0}\t{1}\t{2}\t{3}\t{4}\t{5}", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4], students[i, 5]);
+                    return;
+                }
+            }
+            Console.WriteLine("Enter the Valid Student Marks");
         }
 
         public void MaximumOfMark()
         {
             Console.WriteLine("Maximum Marks Of Student");
             Console.WriteLine("************************");
-            for (int i = 0; i < AddedStudentRecord; i++)
+            for (int i = 0; i < noOfStudentdAdded; i++)
             {
                 int temp;
                 int mark1 = Convert.ToInt32(students[i, 2]);
@@ -87,7 +133,7 @@ namespace StudentDatabaseUsingArray
         {
             Console.WriteLine("Minimum Marks Of Students");
             Console.WriteLine("**************************");
-            for (int i = 0; i < AddedStudentRecord; i++)
+            for (int i = 0; i < noOfStudentdAdded; i++)
             {
                 int temp;
                 int mark1 = Convert.ToInt32(students[i, 2]);
@@ -118,17 +164,17 @@ namespace StudentDatabaseUsingArray
         {
             Console.WriteLine("Average Marks Of Students");
             Console.WriteLine("*************************");
-            for (int i = 0; i < AddedStudentRecord; i++)
+            for (int i = 0; i < noOfStudentdAdded; i++)
             {
-                int Total;
+                int total;
                 float Average;
                 int mark1 = Convert.ToInt32(students[i, 2]);
                 int mark2 = Convert.ToInt32(students[i, 3]);
                 int mark3 = Convert.ToInt32(students[i, 4]);
-                Total = mark1 + mark2 + mark3;
-                Console.WriteLine("Total:{0}", Total);
-                Average = Total / 3;
-                Console.WriteLine("Average:{0}", Average);
+                total = mark1 + mark2 + mark3;
+                Console.WriteLine("Total:{0}", total);
+                Average = total / 3;
+                Console.WriteLine("Average:{0}", Average);               
             }
 
         }
@@ -138,7 +184,7 @@ namespace StudentDatabaseUsingArray
 
             Console.WriteLine("Student Of Result");
             Console.WriteLine("*****************");
-            for (int i = 0; i < AddedStudentRecord; i++)
+            for (int i = 0; i < noOfStudentdAdded; i++)
             {
                 string Result;
                 int mark1 = Convert.ToInt32(students[i, 2]);
@@ -157,74 +203,30 @@ namespace StudentDatabaseUsingArray
             }
         }
 
-        public void GradesOfStudent()
+        private string GradeOfStudent(int mark)
+        {
+            if (mark >= 50 && mark >= 70)
+                return "C Grade";
+            else if (mark > 71 && mark >= 80)
+                return "B Grade";
+            else if (mark < 90)
+                return "A Grade";
+            else
+                return "S Grade";
+        }
+
+        public void GradePriority()
         {
             Console.WriteLine("Grade of Student");
             Console.WriteLine("*****************");
-            for (int i = 0; i < AddedStudentRecord; i++)
+            for (int i = 0; i < noOfStudentdAdded; i++)
             {
                 int mark1 = Convert.ToInt32(students[i, 2]);
                 int mark2 = Convert.ToInt32(students[i, 3]);
                 int mark3 = Convert.ToInt32(students[i, 4]);
-                if (mark1 <= 60 && mark1 >= 70)
-                {
-                    Console.WriteLine("c Grade");
-                }
-
-                else if (mark1 < 71 && mark1 >= 80)
-                {
-                    Console.WriteLine(" B Grade");
-                }
-
-                else if (mark1 < 81 && mark1 >= 90)
-                {
-                    Console.WriteLine("A Grade");
-                }
-
-                if (mark1 < 91 && mark1 > 100)
-                {
-                    Console.WriteLine("S Grade");
-                }
-
-                if (mark2 <= 60 && mark2 >= 70)
-                {
-                    Console.WriteLine("c Grade");
-                }
-
-                else if (mark2 < 71 && mark2 >= 80)
-                {
-                    Console.WriteLine(" B Grade");
-                }
-
-                else if (mark2 < 81 && mark2 >= 90)
-                {
-                    Console.WriteLine("A Grade");
-                }
-
-                if (mark2 < 91 && mark2 > 100)
-                {
-                    Console.WriteLine("S Grade");
-                }
-
-                if (mark3 <= 60 && mark3 >= 70)
-                {
-                    Console.WriteLine("c Grade");
-                }
-
-                else if (mark3 < 71 && mark3 >= 80)
-                {
-                    Console.WriteLine(" B Grade");
-                }
-
-                else if (mark3 < 81 && mark3 >= 90)
-                {
-                    Console.WriteLine("A Grade");
-                }
-
-                if (mark3 < 91 && mark3 > 100)
-                {
-                    Console.WriteLine("S Grade");
-                }
+                Console.WriteLine(GradeOfStudent(mark1));
+                Console.WriteLine(GradeOfStudent(mark2));
+                Console.WriteLine(GradeOfStudent(mark3));
             }
 
         }
