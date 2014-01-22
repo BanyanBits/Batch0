@@ -11,29 +11,24 @@ namespace StudentDatabaseUsingArray
         static void Main(string[] args)
         {
             // Store Student Info
-            StudentDatabase db = new StudentDatabase(8);
-            db.AddStudent(1, "Saran",99, 98, 99,"salem");
-            db.AddStudent(2, "Rajan", 54, 79, 79,"Erode");
-            db.AddStudent(3, "Balan",54, 60, 89,"Karur");
-            db.AddStudent(4, "mania", 67, 80, 95,"Osur");
-            db.AddStudent(5, "Raju", 76, 79, 98, "salem");
-            db.AddStudent(6, "kalai", 58, 68, 60, "Erode");
-            db.AddStudent(7, "kavi", 89, 60, 67, "Karur");
-            db.AddStudent(8, "Balu", 67, 80, 95, "Osur");
+            StudentDatabase db = new StudentDatabase(7);
+            db.AddStudent(1, "Saran", "Raj", 99, 98, 99, 67, 98, "salem");
+            db.AddStudent(2, "Rajathi", "Raja", 99, 89, 78, 69, 99, "erode");
+            db.AddStudent(3, "Balan", "murugan", 99, 99, 99, 99, 99, "Karur");
+            db.AddStudent(4, "mani", "Kandan", 67, 80, 95, 89, 78, "Osur");
            
             // Retrive Student Info
-            db.PrintAllStudentInfo();           
-            db.MaximumOfMark();
-            db.MinimumOFMark();
-            db.AverageStudentOfMark();           
-            db.StudentOfResult();
-            db.PrintStudentNameById();
-            db.printStudentNameByDistrict();
-            db.GradePriority();
-            db.printStudentNameByMarks();
-           
-
-
+            //db.PrintAllStudentInfo();
+            //db.MaximumOfMark();
+            //db.MinimumOFMark();
+            //db.AverageStudentOfMark();
+            //db.StudentOfResult();
+            //db.PrintStudentNameById();
+            //db.printStudentNameByDistrict();
+            //db.GradePriority();
+            //db.printStudentNameByMarks();
+            //db.HighestMarkOfStudent();
+            db.TotalNoOfStudentCount();
         }
     }
 }
