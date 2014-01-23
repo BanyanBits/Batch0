@@ -89,9 +89,7 @@ namespace StudentDatabaseUsingArray
         {
             Console.WriteLine("FindOut The Highest marks Of Each District");
             Console.WriteLine("******************************************");
-            string district;            
-            Console.Write("Enter The District");
-            Console.WriteLine("\n*******************");
+            string district;
             district = Console.ReadLine();
             int addedStudentMark = 0;
             int highestMark = 0;
@@ -108,12 +106,13 @@ namespace StudentDatabaseUsingArray
                         highestMark = total;
                         index = i;
                     }
-                    Console.WriteLine(highestMark);
+
                 }
+                Console.WriteLine(highestMark);
 
             }
-        }
 
+        }
         public void printStudentNameByMarks()
         {
             string studentMark;
@@ -127,7 +126,7 @@ namespace StudentDatabaseUsingArray
                 if ((students[i, 3] == studentMark) || (students[i, 4] == studentMark) || (students[i, 5] == studentMark) || (students[i, 6] == studentMark) || (students[i, 7] == studentMark))
                 {
                     Console.WriteLine("\t{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4], students[i, 5], students[i, 6], students[i, 7], students[i, 8]);
-                    return;
+
                 }
             }
             Console.WriteLine("Enter the Valid Student Marks");
@@ -340,5 +339,115 @@ namespace StudentDatabaseUsingArray
             }
             Console.WriteLine("\t{0}\t{1}\t{2}\t{3}", students[index, 0], students[index, 1], students[index, 2], highestMarkOfStudends);
         }
+        public void TotalCountStudent()
+        {
+            int num = 0;
+            Console.WriteLine("\n\t Total Student Count");
+            Console.WriteLine("\t **** ** ******\n");
+            for (int i = 0; i < noOfStudentdAdded; i++)
+            {
+                num++;
+                Console.WriteLine(students[i, 0]);
+
+            }
+            Console.Write("\n :Total count Student ");
+            Console.WriteLine(num);
+        }
+
+        public void FindOutHighestMarkOfEachSubject()
+        {
+            Console.WriteLine("FindOut The Highest marks Of Each Marks");
+            Console.WriteLine("******************************************");
+            string[] mark1 = new string[100];
+            mark1[0] = students[0, 3];
+            int n = 0;
+            int i;
+            for (i = 1; i < noOfStudentdAdded; i++)
+            {
+                if (mark1[n] != students[i, 3])
+                {
+                    mark1[n] = students[i, 3];
+                }
+                n = i;
+            }
+            Console.WriteLine("List Of  Highest Mark1\n");
+        }
+
+        public void DisplayToMark1Only()
+        {
+            int num = 0;
+            Console.WriteLine("\n\t List Of Mark1");
+            Console.WriteLine("\t **** ** ******\n");
+            for (int i = 0; i < noOfStudentdAdded; i++)
+            {
+                num++;
+                Console.WriteLine(students[i, 3]);
+
+            }
+            Console.Write("\n the list of Mark1 : ");
+            Console.WriteLine(num);
+        }
+
+        public void Districtname()
+        {
+            int num = 0;
+            Console.WriteLine("\n\t List Of district name");
+            Console.WriteLine("\t **** ** ******** ****\n");
+            for (int i = 0; i < noOfStudentdAdded; i++)
+            {
+                num++;
+                Console.WriteLine(students[i, 8]);
+
+            }
+            Console.Write("\n the total number of district  : ");
+            Console.WriteLine(num);
+        }
+
+        public void NumberOfDistrict()
+        {
+            Console.WriteLine("\t the number of district in the state\n\n");
+            string[] district = new string[100];
+
+            int n = 0;
+            // district[0] = students[0, 8];
+          //  int j = 0;
+            district[n] = students[0, 8];
+
+            for (int i = 0; i < noOfStudentdAdded; i++)
+            {
+
+                if (district[n] != students[i, 8])
+                {
+                    for (int j = 0; j < 100; j++)
+                    {
+                        if (district[j] != students[i, 8])
+                            district[n + j] = students[i, 8];                        
+
+                    }
+                    district[n+1] = students[i, 8];
+                    
+                }
+
+                else
+                {
+                    for (int k = 0; k < 100; k++)
+                    {
+                        if (district[k] != students[i, 8])
+                            district[n+k] = students[i, 8];
+                       // j++;
+
+                    }
+
+                }
+                Console.WriteLine("List Of District in the State\n");
+                foreach (var item in district)
+                    Console.WriteLine(item);
+            }
+        }
+
+
     }
 }
+
+
+
