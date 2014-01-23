@@ -42,6 +42,10 @@ namespace StudentDatabaseUsingArray
                 Console.WriteLine("\t{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4], students[i, 5], students[i, 6], students[i, 7], students[i, 8]);
             }
         }
+        public void TotalNoOfStudentCount()
+        {
+
+        }
 
         public void PrintStudentNameById()
         {
@@ -81,6 +85,34 @@ namespace StudentDatabaseUsingArray
             Console.WriteLine("Enter the Valid Student District");
         }
 
+        public void FindOutHighestMarkOfEachDistrict()
+        {
+            Console.WriteLine("FindOut The Highest marks Of Each District");
+            Console.WriteLine("******************************************");
+            string district;            
+            Console.Write("Enter The District");
+            Console.WriteLine("\n*******************");
+            district = Console.ReadLine();
+            int addedStudentMark = 0;
+            int highestMark = 0;
+            int index = 0;
+            for (int i = 0; i < noOfStudentdAdded; i++)
+            {
+                if (students[i, 8] == district)
+                {
+                    int total = Convert.ToInt32(students[i, 3]) + Convert.ToInt32(students[i, 4]) + Convert.ToInt32(students[i, 5]) + Convert.ToInt32(students[i, 6]) + Convert.ToInt32(students[i, 7]);
+                    addedStudentMark++;
+
+                    if (total > highestMark)
+                    {
+                        highestMark = total;
+                        index = i;
+                    }
+                    Console.WriteLine(highestMark);
+                }
+
+            }
+        }
 
         public void printStudentNameByMarks()
         {
