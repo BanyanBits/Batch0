@@ -32,8 +32,10 @@ namespace StudentDataBase
             //db.FindStudentByMark();            
             //db.FindStudentByAddress();
            // db.FindStudentFirstMark();
-            db.FindTopStudentGivenDistrict();
+           // db.FindTopStudentGivenDistrict();
             //db.FindTopStudentEachDistrict();
+            //db.FindOutHighestMarkOfEachDistrict();
+            db.FindStudentsGivenMarkRange();
 
 
 

@@ -253,7 +253,7 @@ namespace StudentDataBase
 
             for (int i = 0; i < noOfStudentdAdded; i++)
             {
-                string tempDistrict = students[i, 8];
+                string tempDistrict = students[i, 5];
                 bool districtNotFound = true;
 
                 for (int j = 0; j < uniqueDistricts.Length; j++)
@@ -263,13 +263,12 @@ namespace StudentDataBase
                         districtNotFound = false;
                         break;
                     }
-
                 }
+
                 if (districtNotFound)
                 {
                     for (int k = 0; k < uniqueDistricts.Length; k++)
                     {
-
                         if (uniqueDistricts[k] == null)
                         {
                             count++;
@@ -296,19 +295,16 @@ namespace StudentDataBase
                 {
                     for (int p = 0; p < noOfStudentdAdded; p++)
                     {
-                        if (num1 == students[p, 8])
+                        if (num1 == students[p, 5])
                         {
-                            int mark1 = Convert.ToInt32(students[p, 3]);
-                            int mark2 = Convert.ToInt32(students[p, 4]);
-                            int mark3 = Convert.ToInt32(students[p, 5]);
-                            int mark4 = Convert.ToInt32(students[p, 6]);
-                            int mark5 = Convert.ToInt32(students[p, 7]);
+                            int mark1 = Convert.ToInt32(students[p, 2]);
+                            int mark2 = Convert.ToInt32(students[p, 3]);
+                            int mark3 = Convert.ToInt32(students[p, 4]);
 
-                            int total = mark1 + mark2 + mark3 + mark4 + mark5;
+                            int total = mark1 + mark2 + mark3;
                             totalmark[index] = total;
                             index++;
                         }
-
                     }
                 }
 
@@ -318,12 +314,32 @@ namespace StudentDataBase
                         hightMark = item;
                 }
                 Console.WriteLine("\n\t {0} : {1}", num1, hightMark);
+                Console.WriteLine("\n The Total Student Of This district  : {0}", count);
             }
         }
 
-        
+        public void FindStudentsGivenMarkRange()   // To Find  ( 80 - 100 ) having mark of the students
+        {
+            Console.WriteLine("\n\t These Students are Having above 80 Marks");
+            Console.WriteLine("\t ***** ******** *** ****** ***** ** *****\n");
 
-        
+            Console.WriteLine("\n Id\tName\tMark1\tMark2\tMark3\tDistrict\tTotal");
+            Console.WriteLine(" **\t****\t*****\t*****\t*****\t********\t*****\n");
+
+            for (int i = 0; i < noOfStudentdAdded; i++)
+            {
+                int mark1 = Convert.ToInt32(students[i, 2]);
+                int mark2 = Convert.ToInt32(students[i, 3]);
+                int mark3 = Convert.ToInt32(students[i, 4]);
+                int total = mark1 + mark2 + mark3;
+
+                if (((mark1 >= 80) && (mark1 <= 100)) || ((mark2 >= 80) && (mark2 <= 100)) || ((mark2 >= 80) && (mark2 <= 100)))
+                {
+                    Console.WriteLine(" {0}\t{1}\t{2}\t{3}\t{4}\t{5}\t\t{6}\n", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4], students[i, 5], total);
+                }
+            } 
+            Console.WriteLine();
+        }
 
 
     }
