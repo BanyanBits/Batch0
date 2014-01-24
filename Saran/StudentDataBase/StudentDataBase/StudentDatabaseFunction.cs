@@ -13,10 +13,10 @@ namespace StudentDataBase
 
         public StudentDatabaseFunction(int totalStudents)
         {
-            students = new string[totalStudents, 6];
+            students = new string[totalStudents, 9];
         }
 
-        public void AddStudent(int id, string name, int mark1, int mark2, int mark3, string district)
+        public void AddStudent(int id, string name, string lastname, int mark1, int mark2, int mark3, int mark4, int mark5, string district)
         {
             students[noOfStudentdAdded, 0] = id.ToString();
             students[noOfStudentdAdded, 1] = name;
@@ -337,7 +337,23 @@ namespace StudentDataBase
                 {
                     Console.WriteLine(" {0}\t{1}\t{2}\t{3}\t{4}\t{5}\t\t{6}\n", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4], students[i, 5], total);
                 }
-            } 
+            }
+            Console.WriteLine();
+        }
+
+        public void AddedTwoSubjectAndLastName()
+        {
+            Console.WriteLine("\n\t Added Two Mark4,Mark5 And LastName Of The Student ");
+            Console.WriteLine("\t ***** *** ***** ***** *** ******** ** *** *******\n");
+            Console.WriteLine("\n Id\tName\tLastName\tMark1\tMark2\tMark3\tMark4\tMark5\tTotal\tAverage\tDistrict");
+            Console.WriteLine(" **\t****\t********\t*****\t*****\t*****\t*****\t******\t*****\t*******\t********\n");
+
+            for (int i = 0; i < noOfStudentdAdded; i++)
+            {
+                int total = Convert.ToInt32(students[i, 3]) + Convert.ToInt32(students[i, 4]) + Convert.ToInt32(students[i, 5]) + Convert.ToInt32(students[i, 6]) + Convert.ToInt32(students[i, 7]);
+                float average = total / 3;
+                Console.WriteLine(" {0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}\t{9}\t{10}", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4], students[i, 5], students[i, 6], students[i, 7], total, average, students[i, 8]);
+            }
             Console.WriteLine();
         }
 
