@@ -12,64 +12,31 @@ namespace StudentDatabaseUsingArray
         {
             // Store Student Info
             StudentDatabase db = new StudentDatabase(32);
-            db.AddStudent(1, "Saran", "Raj", 99, 98, 99, 67, 98, "salem");            
-            db.AddStudent(2, "Rajathi", "Raja", 99, 89, 78, 69, 99, "erode");
-            db.AddStudent(3, "Balan", "murugan", 99, 99, 99, 99, 99, "salem");
-            db.AddStudent(4, "mani", "Kandan", 67, 80, 95, 89, 78, "Osur");
+            db.AddStudent(1, "Saran", "Raj", 34, 65, 76, 67, 98, "salem");
+            db.AddStudent(2, "Rajathi", "Raja", 2, 9, 8, 0, 3, "erode");
+            db.AddStudent(3, "Balan", "murugan", 9, 5, 3, 23, 65, "karur");
+            db.AddStudent(4, "mani", "Kandan", 63, 48, 31, 59, 78, "Osur");
+            db.AddStudent(5, "Balan", "murugan", 23, 40, 93, 15, 19, "karur");
+            db.AddStudent(6, "mani", "Kandan", 67, 80, 73, 89, 42, "Osur");
+            db.AddStudent(7, "Saran", "Raj", 72, 54, 99, 67, 83, "salem");
+            db.AddStudent(8, "Rajathi", "Raja", 12, 89, 78, 65, 40, "erode");
 
-            db.AddStudent(5, "Ram", "Saran", 99, 98, 99, 67, 98, "salem");
-            db.AddStudent(6, "Selva", "Mani", 99, 89, 78, 69, 99, "erode");
-            db.AddStudent(7, "Siva", "Raman", 99, 99, 99, 99, 99, "Karur");
-            db.AddStudent(8, "Subra", "Mani", 67, 80, 95, 89, 78, "Osur");
-            db.AddStudent(1, "Saran", "Raj", 99, 98, 99, 67, 98, "kumari");
-            db.AddStudent(2, "Rajathi", "Raja", 99, 89, 78, 69, 99, "erode");
-            db.AddStudent(3, "Balan", "murugan", 99, 99, 99, 99, 99, "Karur");
-            db.AddStudent(4, "mani", "Kandan", 67, 80, 95, 89, 78, "Osur");
-
-            db.AddStudent(5, "Ram", "Saran", 99, 98, 99, 67, 98, "puri");
-            db.AddStudent(6, "Selva", "Mani", 99, 89, 78, 69, 99, "erode");
-            db.AddStudent(7, "Siva", "Raman", 99, 99, 99, 99, 99, "salem");
-            db.AddStudent(8, "Subra", "Mani", 67, 80, 95, 89, 78, "salem");
-            db.AddStudent(1, "Saran", "Raj", 99, 98, 99, 67, 98, "salem");
-            db.AddStudent(2, "Rajathi", "Raja", 99, 89, 78, 69, 99, "erode");
-            db.AddStudent(3, "Balan", "murugan", 99, 99, 99, 99, 99, "salem");
-            db.AddStudent(4, "mani", "Kandan", 67, 80, 95, 89, 78, "Osur");
-
-            db.AddStudent(5, "Ram", "Saran", 99, 98, 99, 67, 98, "salem");
-            db.AddStudent(6, "Selva", "Mani", 99, 89, 78, 69, 99, "erode");
-            db.AddStudent(7, "Siva", "Raman", 99, 99, 99, 99, 99, "Karur");
-            db.AddStudent(8, "Subra", "Mani", 67, 80, 95, 89, 78, "Osur");
-            db.AddStudent(1, "Saran", "Raj", 99, 98, 99, 67, 98, "kumari");
-            db.AddStudent(2, "Rajathi", "Raja", 99, 89, 78, 69, 99, "erode");
-            db.AddStudent(3, "Balan", "murugan", 99, 99, 99, 99, 99, "Karur");
-            db.AddStudent(4, "mani", "Kandan", 67, 80, 95, 89, 78, "Osur");
-
-            db.AddStudent(5, "Ram", "Saran", 99, 98, 99, 67, 98, "puri");
-            db.AddStudent(6, "Selva", "Mani", 99, 89, 78, 69, 99, "erode");
-            db.AddStudent(7, "Siva", "Raman", 99, 99, 99, 99, 99, "salem");
-            db.AddStudent(8, "Subra", "Mani", 67, 80, 95, 89, 78, "salem");
-
-           // db.AddStudent(8, "Subra", "Mani", 67, 80, 95, 89, 78, "salem");
-            
             // Retrive Student Info
-            //db.PrintAllStudentInfo();
-            //db.MaximumOfMark();
-            //db.MinimumOFMark();
-            //db.AverageStudentOfMark();
-            //db.StudentOfResult();
-            //db.PrintStudentNameById();
-            //db.printStudentNameByDistrict();
-            //db.GradePriority();
-            //db.printStudentNameByMarks();
+            db.PrintAllStudentInfo();
+            db.MaximumOfMark();
+            db.MinimumOFMark();
+            db.AverageStudentOfMark();
+            db.StudentOfResult();
+            db.PrintStudentNameById();
+            db.printStudentNameByDistrict();
+            db.GradePriority();
+            db.printStudentNameByMarks();
+            db.HighestMarkOfStudent();
+            db.Districtname();
+            db.DisplayToMark1Only();
+            db.TotalCountStudent();
+            db.FindOutHighestMarkOfEachDistrict();
 
-            //db.HighestMarkOfStudent();
-            //db.TotalNoOfStudentCount();
-            //db.FindOutHighestMarkOfEachDistrict();
-            //db.FindOutHighestMarkOfEachSubject();
-            //db.Districtname();            
-            //db.DisplayToMark1Only();
-            //db.TotalCountStudent();
-            db.NumberOfDistrict();
 
 
         }

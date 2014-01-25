@@ -42,10 +42,6 @@ namespace StudentDatabaseUsingArray
                 Console.WriteLine("\t{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4], students[i, 5], students[i, 6], students[i, 7], students[i, 8]);
             }
         }
-        public void TotalNoOfStudentCount()
-        {
-
-        }
 
         public void PrintStudentNameById()
         {
@@ -65,6 +61,7 @@ namespace StudentDatabaseUsingArray
             } Console.WriteLine("Enter Valid Id Number");
 
         }
+
         public void printStudentNameByDistrict()
         {
             string district;
@@ -85,34 +82,7 @@ namespace StudentDatabaseUsingArray
             Console.WriteLine("Enter the Valid Student District");
         }
 
-        public void FindOutHighestMarkOfEachDistrict()
-        {
-            Console.WriteLine("FindOut The Highest marks Of Each District");
-            Console.WriteLine("******************************************");
-            string district;
-            district = Console.ReadLine();
-            int addedStudentMark = 0;
-            int highestMark = 0;
-            int index = 0;
-            for (int i = 0; i < noOfStudentdAdded; i++)
-            {
-                if (students[i, 8] == district)
-                {
-                    int total = Convert.ToInt32(students[i, 3]) + Convert.ToInt32(students[i, 4]) + Convert.ToInt32(students[i, 5]) + Convert.ToInt32(students[i, 6]) + Convert.ToInt32(students[i, 7]);
-                    addedStudentMark++;
 
-                    if (total > highestMark)
-                    {
-                        highestMark = total;
-                        index = i;
-                    }
-
-                }
-                Console.WriteLine(highestMark);
-
-            }
-
-        }
         public void printStudentNameByMarks()
         {
             string studentMark;
@@ -339,6 +309,7 @@ namespace StudentDatabaseUsingArray
             }
             Console.WriteLine("\t{0}\t{1}\t{2}\t{3}", students[index, 0], students[index, 1], students[index, 2], highestMarkOfStudends);
         }
+
         public void TotalCountStudent()
         {
             int num = 0;
@@ -352,25 +323,6 @@ namespace StudentDatabaseUsingArray
             }
             Console.Write("\n :Total count Student ");
             Console.WriteLine(num);
-        }
-
-        public void FindOutHighestMarkOfEachSubject()
-        {
-            Console.WriteLine("FindOut The Highest marks Of Each Marks");
-            Console.WriteLine("******************************************");
-            string[] mark1 = new string[100];
-            mark1[0] = students[0, 3];
-            int n = 0;
-            int i;
-            for (i = 1; i < noOfStudentdAdded; i++)
-            {
-                if (mark1[n] != students[i, 3])
-                {
-                    mark1[n] = students[i, 3];
-                }
-                n = i;
-            }
-            Console.WriteLine("List Of  Highest Mark1\n");
         }
 
         public void DisplayToMark1Only()
@@ -403,51 +355,88 @@ namespace StudentDatabaseUsingArray
             Console.WriteLine(num);
         }
 
-        public void NumberOfDistrict()
+        public void FindOutHighestMarkOfEachDistrict()
         {
-            Console.WriteLine("\t the number of district in the state\n\n");
-            string[] district = new string[100];
-
-            int n = 0;
-            // district[0] = students[0, 8];
-          //  int j = 0;
-            district[n] = students[0, 8];
+            int count = 0;
+            string[] uniqueDistricts = new string[noOfStudentdAdded];
 
             for (int i = 0; i < noOfStudentdAdded; i++)
             {
+                string tempDistrict = students[i, 8];
+                bool districtNotFound = true;
 
-                if (district[n] != students[i, 8])
+                for (int j = 0; j < uniqueDistricts.Length; j++)
                 {
-                    for (int j = 0; j < 100; j++)
+                    if (tempDistrict == uniqueDistricts[j])
                     {
-                        if (district[j] != students[i, 8])
-                            district[n + j] = students[i, 8];                        
-
+                        districtNotFound = false;
+                        break;
                     }
-                    district[n+1] = students[i, 8];
-                    
+
+                }
+                if (districtNotFound)
+                {
+                    for (int k = 0; k < uniqueDistricts.Length; k++)
+                    {
+
+                        if (uniqueDistricts[k] == null)
+                        {
+                            count++;
+                            uniqueDistricts[k] = tempDistrict;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            int[] totalmark = new int[count];
+
+            foreach (var num1 in uniqueDistricts)
+            {
+                int index = 0;
+                int hightMark = 0;
+
+                if (num1 == null)
+                {
+                    break;
                 }
 
                 else
                 {
-                    for (int k = 0; k < 100; k++)
+                    for (int p = 0; p < noOfStudentdAdded; p++)
                     {
-                        if (district[k] != students[i, 8])
-                            district[n+k] = students[i, 8];
-                       // j++;
+                        if (num1 == students[p, 8])
+                        {
+                            int mark1 = Convert.ToInt32(students[p, 3]);
+                            int mark2 = Convert.ToInt32(students[p, 4]);
+                            int mark3 = Convert.ToInt32(students[p, 5]);
+                            int mark4 = Convert.ToInt32(students[p, 6]);
+                            int mark5 = Convert.ToInt32(students[p, 7]);
+
+                            int total = mark1 + mark2 + mark3 + mark4 + mark5;
+                            totalmark[index] = total;
+                            index++;
+                        }
 
                     }
-
                 }
-                Console.WriteLine("List Of District in the State\n");
-                foreach (var item in district)
-                    Console.WriteLine(item);
+
+                foreach (int item in totalmark)
+                {
+                    if (hightMark < item)
+                        hightMark = item;
+                }
+                Console.WriteLine("\n\t {0} : {1}", num1, hightMark);
             }
         }
-
-
     }
 }
+
+
+
+
+
+
 
 
 
