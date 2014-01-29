@@ -245,7 +245,7 @@ namespace StudentDataBase
             Console.WriteLine();
         }
 
-        public void FindStudentFirstMark()
+        public void FindTopStudent()
         {
             int temp = 0;
             int student = 0;
@@ -272,10 +272,6 @@ namespace StudentDataBase
 
         public void FindTopStudentGivenDistrict()
         {
-            int temp = 0;
-            int student = 0;
-            int noOfStudentDistrict = 0;
-
             Console.WriteLine("\n\t\t To Find Top Mark  By District");
             Console.WriteLine("\t\t ** **** *** **** ** ********\n");
 
@@ -285,33 +281,38 @@ namespace StudentDataBase
             Console.WriteLine("\nId\tName\tLastName\tMark1\tMark2\tMark3\tMark4\tMark5\tDistrict\tHighestMark");
             Console.WriteLine("**\t****\t********\t*****\t*****\t*****\t*****\t*****\t********\t************\n");
 
+            PrintTopStudentInGivenDistrict(district);
+            
+        }
+
+        private void PrintTopStudentInGivenDistrict(string district)
+        {
+            int studentIndex = 0;
+            int tempTotal = 0;
+
             for (int i = 0; i < noOfStudentdAdded; i++)
             {
                 if (students[i, 8] == district)
                 {
-                    noOfStudentDistrict++;
                     int total = Convert.ToInt32(students[i, 3]) + Convert.ToInt32(students[i, 4]) + Convert.ToInt32(students[i, 5]) + Convert.ToInt32(students[i, 6]) + Convert.ToInt32(students[i, 7]);
-                    if (temp < total)
+                    if (tempTotal < total)
                     {
-                        temp = total;
-                        student = i;
+                        tempTotal = total;
+                        studentIndex = i;
                     }
                 }
             }
-            Console.WriteLine("{0} \t {1} \t {2} \t\t {3} \t {4} \t {5} \t {6} \t {7} \t {8} \t\t{9} \n", students[student, 0], students[student, 1], students[student, 2], students[student, 3], students[student, 4], students[student, 5], students[student, 6], students[student, 7], students[student, 8], temp);
-            Console.WriteLine("\n The Number Of Student is : {0} \n", noOfStudentDistrict);
-            Console.WriteLine();
-
+            Console.WriteLine("{0} \t {1} \t {2} \t\t {3} \t {4} \t {5} \t {6} \t {7} \t {8} \t\t{9} \n", students[studentIndex, 0], students[studentIndex, 1], students[studentIndex, 2], students[studentIndex, 3], students[studentIndex, 4], students[studentIndex, 5], students[studentIndex, 6], students[studentIndex, 7], students[studentIndex, 8], tempTotal);
         }
 
-        public void FindOutHighestMarkOfEachDistrict()
+        public void FindTopStudentInEachDistrict()
         {
             int count = 0;
             string[] uniqueDistricts = new string[noOfStudentdAdded];
 
             for (int i = 0; i < noOfStudentdAdded; i++)
             {
-                string tempDistrict = students[i, 5];
+                string tempDistrict = students[i, 8];
                 bool districtNotFound = true;
 
                 for (int j = 0; j < uniqueDistricts.Length; j++)
@@ -337,47 +338,19 @@ namespace StudentDataBase
                 }
             }
 
-            int[] totalmark = new int[count];
-
-            foreach (var num1 in uniqueDistricts)
+            //TODO Senthil Print Header
+            foreach (var iDistrict in uniqueDistricts)
             {
-                int index = 0;
-                int hightMark = 0;
-
-                if (num1 == null)
-                {
+                if (iDistrict == null)
                     break;
-                }
-
-                else
-                {
-                    for (int p = 0; p < noOfStudentdAdded; p++)
-                    {
-                        if (num1 == students[p, 5])
-                        {
-                            int mark1 = Convert.ToInt32(students[p, 2]);
-                            int mark2 = Convert.ToInt32(students[p, 3]);
-                            int mark3 = Convert.ToInt32(students[p, 4]);
-
-                            int total = mark1 + mark2 + mark3;
-                            totalmark[index] = total;
-                            index++;
-                        }
-                    }
-                }
-
-                foreach (int item in totalmark)
-                {
-                    if (hightMark < item)
-                        hightMark = item;
-                }
-                Console.WriteLine("\n\t {0} : {1}", num1, hightMark);
-                Console.WriteLine("\n The Total Student Of This district  : {0}", count);
+                PrintTopStudentInGivenDistrict(iDistrict);
             }
         }
 
-        public void FindStudentsGivenMarkRange()   // To Find  ( 80 - 100 ) having mark of the students
+        public void FindStudentsInGivenMarkRange() 
         {
+            //TODO Senthil Get range from user
+            //TODO Senthil Add all subject
             Console.WriteLine("\n\t These Students are Having above 80 Marks");
             Console.WriteLine("\t ***** ******** *** ****** ***** ** *****\n");
 
@@ -398,23 +371,5 @@ namespace StudentDataBase
             }
             Console.WriteLine();
         }
-
-        public void AddedTwoSubjectAndLastName()
-        {
-            Console.WriteLine("\n\t Added Two Mark4,Mark5 And LastName Of The Student ");
-            Console.WriteLine("\t ***** *** ***** ***** *** ******** ** *** *******\n");
-            Console.WriteLine("\n Id\tName\tLastName\tMark1\tMark2\tMark3\tMark4\tMark5\tTotal\tAverage\tDistrict");
-            Console.WriteLine(" **\t****\t********\t*****\t*****\t*****\t*****\t******\t*****\t*******\t********\n");
-
-            for (int i = 0; i < noOfStudentdAdded; i++)
-            {
-                int total = Convert.ToInt32(students[i, 3]) + Convert.ToInt32(students[i, 4]) + Convert.ToInt32(students[i, 5]) + Convert.ToInt32(students[i, 6]) + Convert.ToInt32(students[i, 7]);
-                float average = total / 3;
-                Console.WriteLine(" {0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}\t{9}\t{10}", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4], students[i, 5], students[i, 6], students[i, 7], total, average, students[i, 8]);
-            }
-            Console.WriteLine();
-        }
-
-
     }
 }

@@ -21,25 +21,18 @@ namespace StudentDataBase
             db.AddStudent(6, "Mani","Selva",91,80, 54, 60, 45, "Chennai");
 
             // Retrive Student Info
-
-            //  db.PrintAllStudentInfo();
-            //db.PrintStudentNameById();
-           // db.StudentTotalMarkAndAverage();
-           // db.MaxMarkOfStudent();
-           // db.MinimumMarkOfStudent();
-            
-          //  db.PassOrFail();
-
-            // db.FindStudentByMark();            
-          // db.FindStudentByDistrict();
-          //  db.FindStudentFirstMark();
+            db.PrintAllStudentInfo();
+            db.PrintStudentNameById();
+            db.StudentTotalMarkAndAverage();
+            db.MaxMarkOfStudent();
+            db.MinimumMarkOfStudent();
+            db.PassOrFail();
+            db.FindStudentByMark();
+            db.FindStudentByDistrict();
+            db.FindTopStudent();
             db.FindTopStudentGivenDistrict();
-            //db.FindTopStudentEachDistrict();
-           // db.FindOutHighestMarkOfEachDistrict();
-            //db.FindStudentsGivenMarkRange();
-
-            //  db.AddedTwoSubjectAndLastName();
-        
+            db.FindTopStudentInEachDistrict();
+            db.FindStudentsInGivenMarkRange();
         }
 
     }
