@@ -61,7 +61,7 @@ namespace StudentDatabaseUsingArray
             Console.WriteLine("Enter the Valid Number:");            
         }        
 
-        public void printStudentNameByDistrict()
+        public void PrintStudentNameByDistrict()
         {
             string district;
             Console.Write("Enter the Student District:");
@@ -81,7 +81,7 @@ namespace StudentDatabaseUsingArray
                 Console.WriteLine("Enter the Valid Student District:");            
         }
 
-        public void printStudentNameByMarks()
+        public void PrintStudentInfoByMark()
         {
             string studentMark;
             Console.Write("Enter the Student marks:");
@@ -89,15 +89,19 @@ namespace StudentDatabaseUsingArray
             Console.WriteLine("************************");
             Console.WriteLine("\n\tId |FirstName |LastName|Mark1 |Mark2 |Mark3 |Mark4| Mark5| Distict");
             Console.WriteLine("\t***|*********|********| *****| ***** |****|****** | ***** | *******");
+
+            bool foundMatchingStudent = false;
             for (int i = 0; i < noOfStudentdAdded; i++)
             {
                 if ((students[i, 3] == studentMark) || (students[i, 4] == studentMark) || (students[i, 5] == studentMark) || (students[i, 6] == studentMark) || (students[i, 7] == studentMark))
                 {
+                    foundMatchingStudent = true;
                     Console.WriteLine("\t{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4], students[i, 5], students[i, 6], students[i, 7], students[i, 8]);
-
                 }
-            }            
-            Console.WriteLine("Enter the Valid Student Marks");
+            }
+            
+            if(foundMatchingStudent == false)
+                Console.WriteLine("Enter the Valid Student Marks");
         }
 
         public void MaximumOfMark()
@@ -262,7 +266,7 @@ namespace StudentDatabaseUsingArray
                 return "I  -Grade";
         }
 
-        public void GradePriority()
+        public void PrintGradeForEachSubject()
         {
             Console.WriteLine("Grade of Student");
             Console.WriteLine("*****************");
@@ -276,15 +280,12 @@ namespace StudentDatabaseUsingArray
                 int mark3 = Convert.ToInt32(students[i, 5]);
                 int mark4 = Convert.ToInt32(students[i, 6]);
                 int mark5 = Convert.ToInt32(students[i, 7]);
-                Console.WriteLine("\t{0}\t{1}\t{2}\t{3}", students[i, 0], students[i, 1], students[i, 2], GradeOfStudent(mark1));
-                Console.WriteLine("\t{0}\t{1}\t{2}\t{3}", students[i, 0], students[i, 1], students[i, 2], GradeOfStudent(mark2));
-                Console.WriteLine("\t{0}\t{1}\t{2}\t{3}", students[i, 0], students[i, 1], students[i, 2], GradeOfStudent(mark3));
-                Console.WriteLine("\t{0}\t{1}\t{2}\t{3}", students[i, 0], students[i, 1], students[i, 2], GradeOfStudent(mark4));
-                Console.WriteLine("\t{0}\t{1}\t{2}\t{3}", students[i, 0], students[i, 1], students[i, 2], GradeOfStudent(mark3));
+                Console.WriteLine("\t{0}\t{1}\t{2}\tMark1:{3}\tMark2:{4}\tMark3:{5}\tMark4:{6}\tMark5:{7}", students[i, 0], students[i, 1], students[i, 2], 
+                    GradeOfStudent(mark1), GradeOfStudent(mark2), GradeOfStudent(mark3), GradeOfStudent(mark4), GradeOfStudent(mark5));                
             }
         }
 
-        public void HighestMarkOfStudent()
+        public void PrintTopStudentInfo()
         {
             Console.WriteLine("Highest Mark Of Students");
             Console.WriteLine("************************");
@@ -317,7 +318,7 @@ namespace StudentDatabaseUsingArray
             Console.WriteLine(numberOfStudent);
         }
 
-        public void Districtname()
+        public void PrintAllDistrictNames()
         {
             int numberOfDistrict = 0;
             Console.WriteLine("List Of District Name");
@@ -338,7 +339,7 @@ namespace StudentDatabaseUsingArray
             Console.WriteLine("*************************");
             Console.WriteLine("\n\tDistrict |TotalMarks");
             Console.WriteLine("\t*********|***********");
-            int count = 0;
+            int uniqueDistrictsCount = 0;
             string[] uniqueDistricts = new string[noOfStudentdAdded];
 
             for (int i = 0; i < noOfStudentdAdded; i++)
@@ -361,7 +362,7 @@ namespace StudentDatabaseUsingArray
 
                         if (uniqueDistricts[k] == null)
                         {
-                            count++;
+                            uniqueDistrictsCount++;
                             uniqueDistricts[k] = tempDistrict;
                             break;
                         }
@@ -369,23 +370,21 @@ namespace StudentDatabaseUsingArray
                 }
             }
 
-            int[] totalmark = new int[count];
+            int[] totalmark = new int[uniqueDistrictsCount];
 
-            foreach (var num1 in uniqueDistricts)
+            foreach (var iDistrict in uniqueDistricts)
             {
-                int index = 0;
-                int hightMark = 0;
+                int index = 0;              
 
-                if (num1 == null)
+                if (iDistrict == null)
                 {
                     break;
                 }
-
                 else
                 {
                     for (int p = 0; p < noOfStudentdAdded; p++)
                     {
-                        if (num1 == students[p, 8])
+                        if (iDistrict == students[p, 8])
                         {
                             int mark1 = Convert.ToInt32(students[p, 3]);
                             int mark2 = Convert.ToInt32(students[p, 4]);
@@ -397,16 +396,16 @@ namespace StudentDatabaseUsingArray
                             totalmark[index] = total;
                             index++;
                         }
-
                     }
                 }
 
+                int hightMark = 0;
                 foreach (int item in totalmark)
                 {
                     if (hightMark < item)
                         hightMark = item;
                 }
-                Console.WriteLine("\n\t {0}   :   {1}", num1, hightMark);
+                Console.WriteLine("\n\t {0}   :   {1}", iDistrict, hightMark);
             }
         }
     }
