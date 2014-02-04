@@ -33,6 +33,7 @@ namespace StudentDataBase
         public void PrintAllStudentInfo()
         {
             int totalStudent = 0;
+
             Console.WriteLine("\t\nAll Student Infomatiom");
             Console.WriteLine("*** ******* **********\n");
 
@@ -50,24 +51,25 @@ namespace StudentDataBase
             Console.WriteLine();
         }
 
-        public void PrintStudentNameById()
+        public void PrintStudentNameById(string studentId)
         {
-            String studentId;
-            Console.Write("\n Enter the Student Id: ");
-            studentId = (Console.ReadLine());
+            string matchingStudentId = studentId;
+            //String studentId;
+            //Console.Write("\n Enter the Student Id: ");
+            //studentId = (Console.ReadLine());
 
             Console.WriteLine("\nId\tName\tLastName\tMark1\tMark2\tMark3\tMark4\tMark5\tDistrict");
             Console.WriteLine("**\t****\t********\t*****\t*****\t*****\t*****\t*****\t********\n");
 
             for (int i = 0; i < noOfStudentdAdded; i++)
             {
-                if (students[i, 0] == studentId)
+                if (students[i, 0] == matchingStudentId)
                 {
                     Console.WriteLine("{0}\t{1}\t{2}\t\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4], students[i, 5], students[i, 6], students[i, 7], students[i, 8]);
                 }
             }
             Console.WriteLine();
-            int studentIdOutOfRange = Convert.ToInt32(studentId);
+            int studentIdOutOfRange = Convert.ToInt32(matchingStudentId);
 
             if (studentIdOutOfRange > noOfStudentdAdded)
             {
@@ -102,6 +104,7 @@ namespace StudentDataBase
         public void MaxMarkOfStudent()
         {
             int numberOfStudent = 0;
+
             Console.WriteLine("\nId\tName\tLastName\tMark1\tMark2\tMark3\tMark4\tMark5\tMaximumMark");
             Console.WriteLine("**\t****\t********\t*****\t*****\t*****\t*****\t*****\t***********\n");
 
@@ -185,14 +188,12 @@ namespace StudentDataBase
 
         }
 
-        public void FindStudentByMark()
+        public void FindStudentByMark(string mark)
         {
-            int validMark = 0;
+            int matchingStudentCount = 0;
+
             Console.WriteLine("\n\t\t To Find Student By Mark");
             Console.WriteLine("\t\t ** **** ******* ** ****\n");
-
-            Console.Write("Enter the Student Mark :  ");
-            string mark = Console.ReadLine();
 
             Console.WriteLine("\n Id \t Name \t LastName \t Mark1 \t Mark2 \t Mark3 \t Mark4 \t Mark5 \t District");
             Console.WriteLine(" ** \t **** \t ******** \t ***** \t ***** \t ***** \t ***** \t ***** \t ********\n");
@@ -201,35 +202,36 @@ namespace StudentDataBase
             {
                 if ((students[i, 3] == mark) || (students[i, 4] == mark) || (students[i, 5] == mark) || (students[i, 6] == mark) || (students[i, 7] == mark))
                 {
-                    validMark++;
+                    matchingStudentCount++;
                     Console.WriteLine(" {0} \t {1} \t {2} \t\t {3} \t {4} \t {5} \t {6} \t {7} \t {8}\n", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4], students[i, 5], students[i, 6], students[i, 7], students[i, 8]);
                 }
             }
             Console.WriteLine();
-            Console.WriteLine("\t {0}'  Students having {1} Mark ", validMark, mark);
+            Console.WriteLine("\t {0}'  Students having {1} Mark ", matchingStudentCount, mark);
 
-            if (validMark == 0)
+            if (matchingStudentCount == 0)
             {
                 Console.WriteLine("Enter the Student Valid Mark");
             }
             Console.WriteLine();
         }
 
-        public void FindStudentByDistrict()
+        public void FindStudentByDistrict(string district)
         {
             int numberOfStudent = 0;
+            string studentDistrict = district;
+
             Console.WriteLine("\n\t\t To Find Student By District");
             Console.WriteLine("\t\t ** **** ******* ** *******\n");
 
-            Console.Write("Enter the Student District : ");
-            string district = Console.ReadLine();
+
 
             Console.WriteLine("\nId\tName\tLastName\tMark1\tMark2\tMark3\tMark4\tMark5\tDistrict");
             Console.WriteLine("**\t****\t********\t*****\t*****\t*****\t*****\t*****\t*********\n");
 
             for (int i = 0; i < noOfStudentdAdded; i++)
             {
-                if (students[i, 8] == district)
+                if (students[i, 8] == studentDistrict)
                 {
                     numberOfStudent++;
                     Console.WriteLine("{0}\t{1}\t{2}\t\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}\n ", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4], students[i, 5], students[i, 6], students[i, 7], students[i, 8]);
@@ -270,24 +272,24 @@ namespace StudentDataBase
             Console.WriteLine("\n The Number Of Student is : {0} \n\n", noOfStudentdAdded);
         }
 
-        public void FindTopStudentGivenDistrict()
+        public void FindTopStudentGivenDistrict(string studentDistrict)
         {
             int temp = 0;
             int student = 0;
             int noOfStudentDistrict = 0;
+            string districtStudent = studentDistrict;
 
             Console.WriteLine("\n\t\t To Find Top Mark  By District");
             Console.WriteLine("\t\t ** **** *** **** ** ********\n");
 
-            Console.Write("Enter the District : ");
-            string district = Console.ReadLine();
+            
 
             Console.WriteLine("\nId\tName\tLastName\tMark1\tMark2\tMark3\tMark4\tMark5\tDistrict\tHighestMark");
             Console.WriteLine("**\t****\t********\t*****\t*****\t*****\t*****\t*****\t********\t************\n");
 
             for (int i = 0; i < noOfStudentdAdded; i++)
             {
-                if (students[i, 8] == district)
+                if (students[i, 8] == districtStudent)
                 {
                     noOfStudentDistrict++;
                     int total = Convert.ToInt32(students[i, 3]) + Convert.ToInt32(students[i, 4]) + Convert.ToInt32(students[i, 5]) + Convert.ToInt32(students[i, 6]) + Convert.ToInt32(students[i, 7]);
@@ -311,7 +313,7 @@ namespace StudentDataBase
 
             for (int i = 0; i < noOfStudentdAdded; i++)
             {
-                string tempDistrict = students[i, 5];
+                string tempDistrict = students[i, 8];
                 bool districtNotFound = true;
 
                 for (int j = 0; j < uniqueDistricts.Length; j++)
@@ -353,13 +355,16 @@ namespace StudentDataBase
                 {
                     for (int p = 0; p < noOfStudentdAdded; p++)
                     {
-                        if (num1 == students[p, 5])
+                        if (num1 == students[p, 8])
                         {
-                            int mark1 = Convert.ToInt32(students[p, 2]);
-                            int mark2 = Convert.ToInt32(students[p, 3]);
-                            int mark3 = Convert.ToInt32(students[p, 4]);
+                            int mark1 = Convert.ToInt32(students[p, 3]);
+                            int mark2 = Convert.ToInt32(students[p, 4]);
+                            int mark3 = Convert.ToInt32(students[p, 5]);
+                            int mark4 = Convert.ToInt32(students[p, 6]);
+                            int mark5 = Convert.ToInt32(students[p, 7]);
 
-                            int total = mark1 + mark2 + mark3;
+
+                            int total = mark1 + mark2 + mark3 +mark4 + mark5 ;
                             totalmark[index] = total;
                             index++;
                         }
@@ -375,6 +380,7 @@ namespace StudentDataBase
                 Console.WriteLine("\n The Total Student Of This district  : {0}", count);
             }
         }
+
 
         public void FindStudentsGivenMarkRange()   // To Find  ( 80 - 100 ) having mark of the students
         {
@@ -415,6 +421,6 @@ namespace StudentDataBase
             Console.WriteLine();
         }
 
-      
+
     }
 }
