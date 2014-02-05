@@ -282,7 +282,7 @@ namespace StudentDataBase
             Console.WriteLine("\n\t\t To Find Top Mark  By District");
             Console.WriteLine("\t\t ** **** *** **** ** ********\n");
 
-            
+
 
             Console.WriteLine("\nId\tName\tLastName\tMark1\tMark2\tMark3\tMark4\tMark5\tDistrict\tHighestMark");
             Console.WriteLine("**\t****\t********\t*****\t*****\t*****\t*****\t*****\t********\t************\n");
@@ -308,7 +308,6 @@ namespace StudentDataBase
 
         public void FindOutHighestMarkOfEachDistrict()
         {
-            int count = 0;
             string[] uniqueDistricts = new string[noOfStudentdAdded];
 
             for (int i = 0; i < noOfStudentdAdded; i++)
@@ -331,7 +330,6 @@ namespace StudentDataBase
                     {
                         if (uniqueDistricts[k] == null)
                         {
-                            count++;
                             uniqueDistricts[k] = tempDistrict;
                             break;
                         }
@@ -339,46 +337,43 @@ namespace StudentDataBase
                 }
             }
 
-            int[] totalmark = new int[count];
+            Console.WriteLine("\n\t\t To Find Top Mark  By District");
+            Console.WriteLine("\t\t ** **** *** **** ** ********\n");
+            Console.WriteLine("\nId\tName\tLastName\tMark1\tMark2\tMark3\tMark4\tMark5\tDistrict\tHighestMark");
+            Console.WriteLine("**\t****\t********\t*****\t*****\t*****\t*****\t*****\t********\t************\n");
+
 
             foreach (var num1 in uniqueDistricts)
             {
-                int index = 0;
-                int hightMark = 0;
 
-                if (num1 == null)
-                {
-                    break;
-                }
+                FindTopStudentEachDistrict(num1);
+            }
+        }
 
-                else
+
+        public void FindTopStudentEachDistrict(string studentDistrict)
+        {
+            int temp = 0;
+            int student = 0;
+            string districtStudent = studentDistrict;
+
+            for (int i = 0; i < noOfStudentdAdded; i++)
+            {
+                if (students[i, 8] == districtStudent)
                 {
-                    for (int p = 0; p < noOfStudentdAdded; p++)
+                    int total = Convert.ToInt32(students[i, 3]) + Convert.ToInt32(students[i, 4]) + Convert.ToInt32(students[i, 5]) + Convert.ToInt32(students[i, 6]) + Convert.ToInt32(students[i, 7]);
+                    if (temp < total)
                     {
-                        if (num1 == students[p, 8])
-                        {
-                            int mark1 = Convert.ToInt32(students[p, 3]);
-                            int mark2 = Convert.ToInt32(students[p, 4]);
-                            int mark3 = Convert.ToInt32(students[p, 5]);
-                            int mark4 = Convert.ToInt32(students[p, 6]);
-                            int mark5 = Convert.ToInt32(students[p, 7]);
-
-
-                            int total = mark1 + mark2 + mark3 +mark4 + mark5 ;
-                            totalmark[index] = total;
-                            index++;
-                        }
+                        temp = total;
+                        student = i;
                     }
                 }
 
-                foreach (int item in totalmark)
-                {
-                    if (hightMark < item)
-                        hightMark = item;
-                }
-                Console.WriteLine("\n\t {0} : {1}", num1, hightMark);
-                Console.WriteLine("\n The Total Student Of This district  : {0}", count);
+
             }
+            Console.WriteLine("{0} \t {1} \t {2} \t\t {3} \t {4} \t {5} \t {6} \t {7} \t {8} \t\t{9} \n", students[student, 0], students[student, 1], students[student, 2], students[student, 3], students[student, 4], students[student, 5], students[student, 6], students[student, 7], students[student, 8], temp);
+            Console.WriteLine();
+
         }
 
 
@@ -387,36 +382,23 @@ namespace StudentDataBase
             Console.WriteLine("\n\t These Students are Having above 80 Marks");
             Console.WriteLine("\t ***** ******** *** ****** ***** ** *****\n");
 
-            Console.WriteLine("\n Id\tName\tMark1\tMark2\tMark3\tDistrict\tTotal");
-            Console.WriteLine(" **\t****\t*****\t*****\t*****\t********\t*****\n");
+            Console.WriteLine("\n Id\tName\tLastName\tMark1\tMark2\tMark3\tMark4\tMark5\tDistrict\tTotal");
+            Console.WriteLine(" **\t****\t********\t*****\t*****\t*****\t*****\t*****\t********\t*****\n");
 
             for (int i = 0; i < noOfStudentdAdded; i++)
             {
-                int mark1 = Convert.ToInt32(students[i, 2]);
-                int mark2 = Convert.ToInt32(students[i, 3]);
-                int mark3 = Convert.ToInt32(students[i, 4]);
-                int total = mark1 + mark2 + mark3;
+                int mark1 = Convert.ToInt32(students[i, 3]);
+                int mark2 = Convert.ToInt32(students[i, 4]);
+                int mark3 = Convert.ToInt32(students[i, 5]);
+                int mark4 = Convert.ToInt32(students[i, 6]);
+                int mark5 = Convert.ToInt32(students[i, 7]);
 
-                if (((mark1 >= 80) && (mark1 <= 100)) || ((mark2 >= 80) && (mark2 <= 100)) || ((mark2 >= 80) && (mark2 <= 100)))
+                int total = mark1 + mark2 + mark3 + mark4 + mark5;
+
+                if (((mark1 >= 80) && (mark1 <= 100)) || ((mark2 >= 80) && (mark2 <= 100)) || ((mark4 >= 80) && (mark4 <= 100)) || ((mark5 >= 80) && (mark5 <= 100)))
                 {
-                    Console.WriteLine(" {0}\t{1}\t{2}\t{3}\t{4}\t{5}\t\t{6}\n", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4], students[i, 5], total);
+                    Console.WriteLine(" {0}\t{1}\t{2}\t\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}\t\t{9}\n", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4], students[i, 5],students[i, 6],students[i, 7],students[i, 8], total);
                 }
-            }
-            Console.WriteLine();
-        }
-
-        public void AddedTwoSubjectAndLastName()
-        {
-            Console.WriteLine("\n\t Added Two Mark4,Mark5 And LastName Of The Student ");
-            Console.WriteLine("\t ***** *** ***** ***** *** ******** ** *** *******\n");
-            Console.WriteLine("\n Id\tName\tLastName\tMark1\tMark2\tMark3\tMark4\tMark5\tTotal\tAverage\tDistrict");
-            Console.WriteLine(" **\t****\t********\t*****\t*****\t*****\t*****\t******\t*****\t*******\t********\n");
-
-            for (int i = 0; i < noOfStudentdAdded; i++)
-            {
-                int total = Convert.ToInt32(students[i, 3]) + Convert.ToInt32(students[i, 4]) + Convert.ToInt32(students[i, 5]) + Convert.ToInt32(students[i, 6]) + Convert.ToInt32(students[i, 7]);
-                float average = total / 3;
-                Console.WriteLine(" {0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}\t{9}\t{10}", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4], students[i, 5], students[i, 6], students[i, 7], total, average, students[i, 8]);
             }
             Console.WriteLine();
         }

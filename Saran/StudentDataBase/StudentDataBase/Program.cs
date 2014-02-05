@@ -29,13 +29,8 @@ namespace StudentDataBase
             //FindStudentByDistrict();
             //FindStudentFirstMark();
             //FindTopStudentGivenDistrict();
-            FindOutHighestMarkOfEachDistrict();
-
-
-
-
-
-
+            //FindOutHighestMarkOfEachDistrict();
+            FindStudentsGivenMarkRange();
 
 
         }
@@ -126,6 +121,11 @@ namespace StudentDataBase
         }
 
 
+
+        static void FindStudentsGivenMarkRange()
+        {
+            db.FindStudentsGivenMarkRange();
+        }
 
     }
 }
