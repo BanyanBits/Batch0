@@ -47,7 +47,9 @@ namespace ConsoleApplication1
                 {
                     if (temp > min)
                         temp = min;
-                } Console.WriteLine("{0} \t{1} \t{2}  \t{3} \t{4} \t{5} \t{6} \t{7} \t{8}", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4], students[i, 5], students[i, 6], students[i, 7], temp);
+                } 
+                Console.WriteLine("{0} \t{1} \t{2}  \t{3} \t{4} \t{5} \t{6} \t{7} \t{8}", students[i, 0], students[i, 1], students[i, 2], students[i, 3], students[i, 4], students[i, 5], students[i, 6], students[i, 7], temp);
+                Console.WriteLine( "" );
             }
 
         }
