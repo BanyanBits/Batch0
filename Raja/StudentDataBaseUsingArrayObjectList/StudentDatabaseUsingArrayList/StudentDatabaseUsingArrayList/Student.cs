@@ -13,5 +13,8 @@ namespace StudentDatabaseUsingArrayList
         public int mark1;
         public int mark2;
         public int mark3;
+        public int mark4;
+        public int mark5;
+        public string district;
     }
 }
