@@ -33,14 +33,18 @@ namespace StudentDatabaseUsingArrayList
             Console.WriteLine(" The Student mark:{0}",studentmark);         
             Console.WriteLine("Id  | Name");
             Console.WriteLine("****|*****");
+            bool foundMatchingStudent = false;
             for (int i = 0; i <numberOfAddedStudents; i++)
             {
                 if (students[i].mark1 == studentmark || students[i].mark2 == studentmark || students[i].mark3 == studentmark || students[i].mark4 == studentmark || students[i].mark5 == studentmark)
                 {
+                    foundMatchingStudent = true;
                     Console.WriteLine("{0}    {1}",students[i].id,students[i].name);
                 }
                 
             }
+            if(foundMatchingStudent==false)
+                Console.WriteLine("Enter Valid Student Mark:");
         }
         public void FindTopStudentGivenDistrict(string district)
         {
@@ -63,7 +67,84 @@ namespace StudentDatabaseUsingArrayList
                 }
             }
             Console.WriteLine("{0}        {1}     {2} ", students[student].id, students[student].name,HighestMark);
-            Console.WriteLine("NumberofStudentDistrict:{0}",noOfStudentDistrict);
+            Console.WriteLine("Number Of Student Same District:{0}",noOfStudentDistrict);
+        }
+        public void FindOutHighestMarkOfEachDistrict()
+        {
+            Console.WriteLine("\nHighestMarkOfEachDistrict");
+            Console.WriteLine("*************************");
+            Console.WriteLine("Id|District |TotalMarks");
+            Console.WriteLine("**|*********|***********");
+            int uniqueDistrictsCount = 0;
+            string[] uniqueDistricts = new string[numberOfAddedStudents];
+
+            for (int i = 0; i < numberOfAddedStudents; i++)
+            {
+                string tempDistrict = students[i].district;
+                bool districtNotFound = true;
+
+                for (int j = 0; j < uniqueDistricts.Length; j++)
+                {
+                    if (tempDistrict == uniqueDistricts[j])
+                    {
+                        districtNotFound = false;
+                        break;
+                    }
+                }
+                if (districtNotFound)
+                {
+                    for (int k = 0; k < uniqueDistricts.Length; k++)
+                    {
+
+                        if (uniqueDistricts[k] == null)
+                        {
+                            uniqueDistrictsCount++;
+                            uniqueDistricts[k] = tempDistrict;
+                            break;
+                        }
+                        
+                    }
+                } 
+            }
+        
+
+            int[] totalmark = new int[uniqueDistrictsCount];
+
+            foreach (var iDistrict in uniqueDistricts)
+            {
+                int index = 0;
+
+                if (iDistrict == null)
+                {
+                    break;
+                }
+                else
+                {
+                    for (int p = 0; p < uniqueDistricts.Length; p++)
+                    {
+                        if (iDistrict == students[p].district)
+                        {
+                            int mark1 = students[p].mark1;
+                            int mark2 = students[p].mark2;
+                            int mark3 = students[p].mark3;
+                            int mark4 = students[p].mark4;
+                            int mark5 = students[p].mark5;
+
+                            int total = mark1 + mark2 + mark3 + mark4 + mark5;
+                            totalmark[index] = total;
+                            index++;
+                        }
+                    }
+                }
+
+                int hightMark = 0;
+                foreach (int item in totalmark)
+                {
+                    if (hightMark < item)
+                        hightMark = item;
+                }
+                Console.WriteLine(" {0}    {1}     {2}",students[index].id ,iDistrict, hightMark);
+            }
         }
         public void PrintOfTopStudent()
         {
@@ -84,18 +165,21 @@ namespace StudentDatabaseUsingArrayList
             }
             Console.WriteLine("{0}     {1}     {2}", students[index].id, students[index].name,highestMarkOfStudends);
         }
+        
         private string GradeOfSubject(int marks)
         {
-            if (marks >= 50 && marks <= 60)
+            if (marks < 40)
+                return "U";
+            else if (marks >= 50 && marks <= 60)
                 return " D";
             else if (marks > 71 && marks <= 80)
                 return "C";
             else if (marks > 81 && marks <= 90)
                 return "B";
             else if (marks > 90)
-                return "S";
-            else
                 return "A";
+            else
+                return "S";
         }
         public void PrintGradeForEachSubject()
         {
@@ -110,7 +194,7 @@ namespace StudentDatabaseUsingArrayList
                 int mark3 = students[i].mark3;
                 int mark4 = students[i].mark4;
                 int mark5 = students[i].mark5;
-                Console.WriteLine("{0} {1} Mark1:{2} Mark2:{3} Mark3:{4} Mark4:{5} Mark5:{6}", students[i].id, students[i].name, GradeOfSubject(mark1), GradeOfSubject(mark2), GradeOfSubject(mark3), GradeOfSubject(mark4), GradeOfSubject(mark5));
+                Console.WriteLine("{0} {1} Mark1:{2} Mark2:{3} Mark3:{4}  Mark4:{5} Mark5:{6}", students[i].id, students[i].name, GradeOfSubject(mark1), GradeOfSubject(mark2), GradeOfSubject(mark3), GradeOfSubject(mark4), GradeOfSubject(mark5));
 
             }
         }
