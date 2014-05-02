@@ -30,7 +30,7 @@ namespace Student_Database
 
         public void DeleteStudent(int id)
         {
-            Console.WriteLine("Enter the Id:");
+            Console.WriteLine("Enter the Id:",id);
             int userInput = Convert.ToInt32(Console.ReadLine());
 
             foreach (var stu in students)
@@ -43,12 +43,28 @@ namespace Student_Database
             }
         }
 
-        public void StudentWithTopMark()
+        public void StudentWithGivenMark()
         {
             Console.WriteLine("Enter the Mark1:");
             int mark1 = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("StudentId|StudentName");
-            Console.WriteLine("*********|***********");
+            Console.WriteLine("\tStuId\tStuName");
+            Console.WriteLine("\t*****\t*******");
+
+            foreach (var iStudent in students)
+            {
+                if (iStudent.Mark1 == mark1)
+                {
+                    Console.WriteLine("\t{0}       \t{1}", iStudent.Id, iStudent.Name);
+                }
+            }
+
+        }
+
+        public void PrintWithHunderdMark(int mark1)
+        {
+            Console.WriteLine("Enter the Mark1:");
+            Console.WriteLine("\tStuId\tStuName");
+            Console.WriteLine("*****\t*******");
 
             foreach (var iStudent in students)
             {

@@ -21,6 +21,7 @@ namespace Student_Database
             Console.WriteLine("c.Add the Student");
             Console.WriteLine("d.Delete the Student");
             Console.WriteLine("h.Students who scored hunderd marks");
+            Console.WriteLine("g.Students with marks");
             Console.WriteLine("q.Exit");
             Console.Write("Enter Your Choice");
             ConsoleKeyInfo key = Console.ReadKey();
@@ -29,11 +30,15 @@ namespace Student_Database
             {
                 PrintStudentcount();
             }
+            if (key.Key == ConsoleKey.G)
+            {
+                StudentWithMark();
+            }
             if (key.Key == ConsoleKey.C)
             {
                 AddStudent();
             }
-            if(key.Key==ConsoleKey.H)
+            if (key.Key == ConsoleKey.H)
             {
                 StudentWithHunderdMark();
             }
@@ -49,7 +54,12 @@ namespace Student_Database
 
         public void StudentWithHunderdMark()
         {
-            db.StudentWithTopMark();
+            db.PrintWithHunderdMark(100);
+        }
+
+        public void StudentWithMark()
+        {
+            db.StudentWithGivenMark();
         }
 
         public void AddStudent()
