@@ -46,6 +46,7 @@ namespace StudentDatabaseUsingArrayList
             if(foundMatchingStudent==false)
                 Console.WriteLine("Enter Valid Student Mark:");
         }
+
         public void FindTopStudentGivenDistrict(string district)
         {
             int HighestMark = 0;
@@ -120,7 +121,7 @@ namespace StudentDatabaseUsingArrayList
                 }
                 else
                 {
-                    for (int p = 0; p < uniqueDistricts.Length; p++)
+                    for (int p = 0; p < numberOfAddedStudents; p++)
                     {
                         if (iDistrict == students[p].district)
                         {
@@ -143,9 +144,12 @@ namespace StudentDatabaseUsingArrayList
                     if (hightMark < item)
                         hightMark = item;
                 }
-                Console.WriteLine(" {0}    {1}     {2}",students[index].id ,iDistrict, hightMark);
+
+                Console.WriteLine(" {0}    {1}     {2}", students[index].id, iDistrict, hightMark);
             }
+            
         }
+
         public void PrintOfTopStudent()
         {
             Console.WriteLine("Highest Mark Of Students");
@@ -282,6 +286,7 @@ namespace StudentDatabaseUsingArrayList
                }
             }
         }
+
         public void StudentOfResult()
         {
             Console.WriteLine("Student Of Result");
@@ -292,7 +297,7 @@ namespace StudentDatabaseUsingArrayList
             {
                 string result;
                 if (students[i].mark1 >= 40 && students[i].mark2 >= 40 && students[i].mark3 >= 40 && students[i].mark4 >= 40 && students[i].mark5 >= 40)
-                    {
+                {
                  result ="pass";
                  Console.WriteLine("{0}    {1}",students[i].name,result);
                 }
@@ -304,6 +309,7 @@ namespace StudentDatabaseUsingArrayList
  
             }
         }
+
         public void AverageStudentMark()
         {
             Console.WriteLine("Average Student Mark");

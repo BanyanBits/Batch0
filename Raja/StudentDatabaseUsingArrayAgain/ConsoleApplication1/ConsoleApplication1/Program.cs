@@ -21,13 +21,13 @@ namespace ConsoleApplication1
             //db.studentNameByDistrict();
             //db.studentOfResult();
             //db.averageStudentOfMark();
-            //db.printTopStudentInfo();
+            db.printTopStudentInfo();
             //db.PrintStudentInfoByMark();
             //db.FindStudentGivenMarkRange();
             //db.FindTopStudentGivenDistrict();
             //db.MaximumMarkOfStudent();
             //db.MinimumMarkOfStudent();
-            db.FindOutHighestMarkOfEachDistrict();
+            //db.FindOutHighestMarkOfEachDistrict();
                        
         }
     }

@@ -15,6 +15,26 @@ namespace Student_Database
             students.Add(student);
         }
 
+        private bool StudentExistId(int id)
+        {
+            Console.WriteLine("Enter the Id", id);
+            foreach (Student iStudent in students)
+            {
+                if (iStudent.Id == id)
+                {
+                 break;
+                }              
+                               
+            }
+            return false;
+        }
+
+        public void DeleteStudent()
+        {
+           
+         
+        }
+
         public int Count
         {
             get
