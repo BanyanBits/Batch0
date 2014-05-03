@@ -10,97 +10,152 @@ namespace Student_Database
     {
         StudentDb db = new StudentDb();
 
-        public void StudentMainMenu()
+        private void DisplayMainMenu()
         {
             Console.WriteLine("");
-            Console.WriteLine("************************************");
-            Console.WriteLine("Student Database-Application by Raja");
-            Console.WriteLine("************************************");
-            Console.WriteLine("Please select options below and Entry the student application");
-            Console.WriteLine("a.Print Students Count");
-            Console.WriteLine("c.Add the Student");
-            Console.WriteLine("d.Delete the Student");
-            Console.WriteLine("h.Students who scored hunderd marks");
-            Console.WriteLine("g.Students with marks");
+            Console.WriteLine("**************************************");
+            Console.WriteLine("Students Database-Application By Raja");
+            Console.WriteLine("**************************************");
+            Console.WriteLine("Please select the options below to proceed");
+            Console.WriteLine("c.Print Students Count");
+            Console.WriteLine("a.Add a New Student");
+            Console.WriteLine("d.Delete a Student");
+            Console.WriteLine("h.Student with Hunderd Marks");
+            Console.WriteLine("f.Student With Given Marks");
             Console.WriteLine("q.Exit");
-            Console.Write("Enter Your Choice");
+            Console.Write("Enter Your Choice:");
             ConsoleKeyInfo key = Console.ReadKey();
             Console.WriteLine(Environment.NewLine);
-            if (key.Key == ConsoleKey.A)
+            switch (key.Key)
             {
-                PrintStudentcount();
-            }
-            if (key.Key == ConsoleKey.G)
-            {
-                StudentWithMark();
-            }
-            if (key.Key == ConsoleKey.C)
-            {
-                AddStudent();
-            }
-            if (key.Key == ConsoleKey.H)
-            {
-                StudentWithHunderdMark();
-            }
-            if (key.Key == ConsoleKey.D)
-            {
-                DeleteStudent();
-            }
-            if (key.Key == ConsoleKey.Q)
-            {
-                Environment.Exit(0);
+                case ConsoleKey.C:
+                    {
+                        PrintStudentsCount();
+                        break;
+                    }
+                case ConsoleKey.A:
+                    {
+                        AddStudent();
+                        break;
+                    }
+                case ConsoleKey.D:
+                    {
+                        DeleteStudent();
+                        break;
+                    }
+                
+                case ConsoleKey.H:
+                    {
+                        StudentWithHunderdMark();
+                        break;
+                    }
+                case ConsoleKey.F:
+                    {
+                        StudentWithGivenMarks();
+                        break;
+                    }
+                case ConsoleKey.Q:
+                    {
+                        Environment.Exit(0);
+                        break;
+                    }
+                default:
+                    {
+                        Console.WriteLine("Enter the correct options ");
+                        break;
+                    }
             }
         }
 
-        public void StudentWithHunderdMark()
+        private void PrintStudentsCount()
         {
-            db.PrintWithHunderdMark(100);
+            Console.WriteLine("Total Number Of Students in the Database:{0}", db.Count);
         }
 
-        public void StudentWithMark()
+        private void AddStudent()
         {
-            db.StudentWithGivenMark();
-        }
-
-        public void AddStudent()
-        {
-            Console.WriteLine("Enter the Id:");
+            Console.WriteLine("Enter Id");
             string userInput = Console.ReadLine();
             int id;
             if (!Int32.TryParse(userInput, out id))
             {
-                Console.WriteLine("Invalid id ,Please enter the valid id in positive Integer ");
+                Console.WriteLine("Invalid id ,Please enter the valid id in positive integer");
                 return;
             }
-            Console.WriteLine("Enter the Name");
+            Console.WriteLine("Enter  Name");
             string name = Console.ReadLine();
-            Console.WriteLine("Enter the Mark1");
+            Console.WriteLine("Enter Mark1");
             userInput = Console.ReadLine();
             int mark1;
             if (!Int32.TryParse(userInput, out mark1) || mark1 < 0 || mark1 > 100)
             {
-                Console.WriteLine("Invalid mark ,Please enter the valid mark between mark<0&&mark>100");
+                Console.WriteLine("Invalid Mark,Please enter the valid mark between mark<0&&mark>100");
                 return;
             }
-            Student student = new Student(id, name, mark1);
-            db.AddStudent(student);
+            Console.WriteLine("Enter Mark2");
+            userInput = Console.ReadLine();
+            int mark2;
+            if (!Int32.TryParse(userInput, out mark2) || mark2 < 0 || mark2 > 100)
+            {
+                Console.WriteLine("Invalid Mark,Please enter the valid mark between mark<0&&mark>100");
+                return;
+            }
+            Console.WriteLine("Enter Mark3");
+            userInput = Console.ReadLine();
+            int mark3;
+            if (!Int32.TryParse(userInput, out mark3) || mark3 < 0 || mark3 > 100)
+            {
+                Console.WriteLine("Invalid Mark,Please enter the valid mark between mark<0&&mark>100");
+                return;
+            }
+            Console.WriteLine("Enter  School Name");
+            string schoolName = Console.ReadLine();
+            Console.WriteLine("Enter District");
+            string district = Console.ReadLine();
+            Student student = new Student(id, name, mark1, mark2, mark3, schoolName, district);
+            db.AddStudents(student);
         }
 
-        public void DeleteStudent()
+        private void DeleteStudent()
         {
-            db.DeleteStudent(1);
+            Console.WriteLine("Enter Id");
+            string userInput = Console.ReadLine();
+            int id;
+            if (!Int32.TryParse(userInput, out id))
+            {
+                Console.WriteLine("Invalid id ,Please enter the valid id in positive integer");
+                return;
+            }
+
         }
 
-        public void PrintStudentcount()
+        private void StudentWithHunderdMark()
         {
-            Console.WriteLine("Total number of student from the Database{0}", db.Count);
+            List<Student> studentWith100Marks = db.PrintStudentWithHunderdMarks();
+            bool foundMatchingStudent = false;
+            foreach (var student in studentWith100Marks)
+            {
+                foundMatchingStudent = true;
+                Console.WriteLine("Id:{0} Name:{1}", student.Id, student.Name);
+            }
+            if(foundMatchingStudent==false)
+            Console.WriteLine("No one there get 100 marks  in Students ");
+        }
+
+        private void StudentWithGivenMarks()
+        {
+            List<Student> studentWithGivenMarks = db.FindStudentWithGivenMarks(23);
+            foreach (var student in studentWithGivenMarks)
+            {
+                Console.WriteLine("Id{0} Nmae{0}",student.Id,student.Name); 
+            }
         }
 
         public void Run()
         {
             while (true)
             {
-                StudentMainMenu();
+                DisplayMainMenu();
             }
         }
     }

@@ -10,15 +10,27 @@ namespace Student_Database
     {
         List<Student> students = new List<Student>();
 
-        public void AddStudent(Student student)
+        public void AddStudents(Student student)
         {
             students.Add(student);
+        } 
+
+        public List<Student> PrintStudentWithHunderdMarks()
+        {
+            List<Student> studentWith100Marks = new List<Student>();
+            foreach (var iStudent in students)
+            {
+              if(iStudent.Mark1==100||iStudent.Mark2==100||iStudent.Mark3==100)
+              {
+                  studentWith100Marks.Add(iStudent);
+              }
+            }
+            return studentWith100Marks;
         }
 
-        private bool StudentExistId(int id)
+        private bool IsStudentExsit(int id)
         {
-            Console.WriteLine("");
-            foreach (Student iStudent in students)
+            foreach (var iStudent in students)
             {
                 if (iStudent.Id == id)
                 {
@@ -28,51 +40,26 @@ namespace Student_Database
             return false;
         }
 
-        public void DeleteStudent(int id)
+        public void DeleteStudents(int id)
         {
-            Console.WriteLine("Enter the Id:",id);
-            int userInput = Convert.ToInt32(Console.ReadLine());
-
-            foreach (var stu in students)
+            foreach (var student in students)
             {
-                if (stu.Id == userInput)
-                {
-                    students.RemoveAt(userInput);
-                    Console.WriteLine("Student has been deleted Successfully");
-                }
+                students.Remove(student);
+                return;
             }
         }
 
-        public void StudentWithGivenMark()
+        public List<Student> FindStudentWithGivenMarks(int mark1)
         {
-            Console.WriteLine("Enter the Mark1:");
-            int mark1 = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("\tStuId\tStuName");
-            Console.WriteLine("\t*****\t*******");
-
+            List<Student> studentWithGivenMarks = new List<Student>();
             foreach (var iStudent in students)
             {
                 if (iStudent.Mark1 == mark1)
                 {
-                    Console.WriteLine("\t{0}       \t{1}", iStudent.Id, iStudent.Name);
+                    studentWithGivenMarks.Add(iStudent);
                 }
             }
-
-        }
-
-        public void PrintWithHunderdMark(int mark1)
-        {
-            Console.WriteLine("Enter the Mark1:");
-            Console.WriteLine("\tStuId\tStuName");
-            Console.WriteLine("*****\t*******");
-
-            foreach (var iStudent in students)
-            {
-                if (iStudent.Mark1 == mark1)
-                {
-                    Console.WriteLine("{0}       {1}", iStudent.Id, iStudent.Name);
-                }
-            }
+            return studentWithGivenMarks;
         }
 
         public int Count
