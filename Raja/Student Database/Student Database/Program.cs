@@ -10,6 +10,9 @@ namespace Student_Database
     {
         static void Main(string[] args)
         {
+            UserInterface ui = new UserInterface();
+            ui.Run();
+            Console.ReadLine();
         }
     }
 }
