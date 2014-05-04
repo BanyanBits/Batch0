@@ -20,9 +20,10 @@ namespace Student_Database
             Console.WriteLine("c.Print Students Count");
             Console.WriteLine("a.Add a New Student");
             Console.WriteLine("d.Delete a Student");
-            Console.WriteLine("h.Student with Hunderd Marks");
-            Console.WriteLine("f.Student With Given Marks");
-            Console.WriteLine("s.Student with Highest scores");
+            Console.WriteLine("h.Print Student with Hunderd Marks");
+            Console.WriteLine("f.Find Student With Given Marks");
+            Console.WriteLine("s.Find Student with Highest scores");
+            Console.WriteLine("n.Find Student by School Name");
             Console.WriteLine("q.Exit");
             Console.Write("Enter Your Choice:");
             ConsoleKeyInfo key = Console.ReadKey();
@@ -47,17 +48,22 @@ namespace Student_Database
 
                 case ConsoleKey.H:
                     {
-                        StudentWithHunderdMark();
+                        FindStudentWithHunderdMarks();
                         break;
                     }
                 case ConsoleKey.F:
                     {
-                        StudentWithGivenMarks();
+                        FindStudentsWithGivenMarks();
                         break;
                     }
                 case ConsoleKey.S:
                     {
-                        //StudentWithHighestScores();
+                        StudentWithHighestScores();
+                        break;
+                    }
+                case ConsoleKey.N:
+                    {
+                        FindStudentsBySchoolName();
                         break;
                     }
                 case ConsoleKey.Q:
@@ -76,6 +82,17 @@ namespace Student_Database
         private void PrintStudentsCount()
         {
             Console.WriteLine("Total Number Of Students in the Database:{0}", db.Count);
+        }
+
+        public void FindStudentsBySchoolName()
+        {
+            Console.WriteLine("Enter School Name");
+            String schoolName = Console.ReadLine();
+            List<Student> studentsBySchoolName=db.FindStudentsBySchoolName(schoolName);
+            foreach (var student in studentsBySchoolName)
+            {
+                Console.WriteLine("Id:{0} Name:{0}",student.Id,student.Name); 
+            }
         }
 
         private void AddStudent()
@@ -132,45 +149,53 @@ namespace Student_Database
                 Console.WriteLine("Invalid id ,Please enter the valid id in positive integer");
                 return;
             }
-
         }
 
-        //public void StudentWithHighestScores()
-        //{
-        //    Console.WriteLine("Enter Id");
-        //    string userInput = Console.ReadLine();
-
-        //    db.PrintStudentsWithHighestScores(userInput);
-        //}
-
-        private void StudentWithHunderdMark()
-        {
-            List<Student> studentWith100Marks = db.PrintStudentWithHunderdMarks();
-            bool foundMatchingStudent = false;
-            foreach (var student in studentWith100Marks)
-            {
-                foundMatchingStudent = true;
-                Console.WriteLine("Id:{0} Name:{1}", student.Id, student.Name);
-            }
-            if (foundMatchingStudent == false)
-                Console.WriteLine("No one there get 100 marks  in Students ");
-        }
-
-        private void StudentWithGivenMarks()
-        {
-            Console.WriteLine("Enter  Mark1");
+        public void StudentWithHighestScores()
+        {       
+            Console.WriteLine("Enter Id");
             string userInput = Console.ReadLine();
-            int mark1;
-            if (!Int32.TryParse(userInput, out mark1))
+            int id;
+            if (!Int32.TryParse(userInput, out id))
             {
-                Console.WriteLine("Invalid Mark1, Please enter the correct mark1 between mark1=>0 && mark1<=100");
+                Console.WriteLine("Invalid id ,Please enter the valid id in positive integer");
                 return;
             }
-            List<Student> studentWithGivenMarks = db.FindStudentWithGivenMarks(mark1);
-            foreach (var student in studentWithGivenMarks)
+            Student highScoreStudents = db.FindStudentsWithHighestScores();       
+        }
+
+        private void FindStudentWithHunderdMarks()
+        {
+            List<Student> studentWith100Marks = db.FindStudentsWithGivenMarks(100);
+            PrintStudentsList(studentWith100Marks);             
+        }
+
+        private void FindStudentsWithGivenMarks()
+        {
+            Console.WriteLine("Enter  Marks");
+            string userInput = Console.ReadLine();
+            int marks;
+            if (!Int32.TryParse(userInput, out marks))
             {
-                Console.WriteLine("Id{0} Name{0}", student.Id, student.Name);
+                Console.WriteLine("Invalid Marks,Marks Should be 1=>0 && <=100");
+                return;
             }
+            List<Student> studentWithGivenMarks = db.FindStudentsWithGivenMarks(marks);
+            PrintStudentsList(studentWithGivenMarks);           
+        }
+
+        private  void  PrintStudentsList(List<Student> students)
+        {
+            if(students.Any()==false)
+            {
+                Console.WriteLine("No Student Found");
+                return;
+            }
+            foreach (var student in students)
+            {
+                Console.WriteLine("Id:{0}Name:{1}Mark1:{2}Mark2:{3}Mark3:{4}",student.Id,student.Name,student.Mark1,student.Mark2,student.Mark3); 
+            }
+            Console.WriteLine("Total Students:{0}",students.Count);
         }
 
         public void Run()

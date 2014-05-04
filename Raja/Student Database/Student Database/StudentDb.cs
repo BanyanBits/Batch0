@@ -15,34 +15,20 @@ namespace Student_Database
             students.Add(student);
         }
 
-        public List<Student> PrintStudentWithHunderdMarks()
+        public Student FindStudentsWithHighestScores()
         {
-            List<Student> studentWith100Marks = new List<Student>();
+            Student highScoreStudents = null;
+            int highScore = 0;
             foreach (var iStudent in students)
             {
-                if (iStudent.Mark1 == 100 || iStudent.Mark2 == 100 || iStudent.Mark3 == 100)
+                int total = iStudent.Mark1 + iStudent.Mark2 + iStudent.Mark3;
+                if (total > highScore)
                 {
-                    studentWith100Marks.Add(iStudent);
+                    highScore = total;
+                    highScoreStudents = iStudent;
                 }
             }
-            return studentWith100Marks;
-        }
-
-        public int PrintStudentsWithHighestScores(int id)
-        {
-            int highestMarksOfStudent = 0;
-            foreach (var iStudent in students)
-            {
-                if (iStudent.Id == id)
-                {
-                    int total = iStudent.Mark1 + iStudent.Mark2 + iStudent.Mark3;
-                    if (total > highestMarksOfStudent)
-                    {
-                        highestMarksOfStudent = total;
-                    }
-                }
-            }
-            return highestMarksOfStudent;
+            return highScoreStudents;
         }
 
         private bool IsStudentExsit(int id)
@@ -66,17 +52,30 @@ namespace Student_Database
             }
         }
 
-        public List<Student> FindStudentWithGivenMarks(int mark1)
+        public List<Student> FindStudentsWithGivenMarks(int marks)
         {
             List<Student> studentWithGivenMarks = new List<Student>();
             foreach (var iStudent in students)
             {
-                if (iStudent.Mark1 == mark1)
+                if (iStudent.Mark1 == marks || iStudent.Mark2 == marks || iStudent.Mark3 == marks)
                 {
                     studentWithGivenMarks.Add(iStudent);
                 }
             }
             return studentWithGivenMarks;
+        }
+
+        public List<Student>  FindStudentsBySchoolName(String schoolName)
+        {
+            List<Student> studentBySchoolName = new List<Student>();
+            foreach (var iStudent in students)
+            {
+               if(iStudent.SchoolName==schoolName)
+               {
+                   studentBySchoolName.Add(iStudent);
+               }
+            }
+            return studentBySchoolName;
         }
 
         public int Count
