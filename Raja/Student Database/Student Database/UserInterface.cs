@@ -25,6 +25,7 @@ namespace Student_Database
             Console.WriteLine("s.Find Students with Highest scores");
             Console.WriteLine("n.Find Students by School Name");
             Console.WriteLine("b.Find Students By District");
+            Console.WriteLine("p.Find Students By Name");
             Console.WriteLine("q.Exit");
             Console.Write("Enter Your Choice:");
             ConsoleKeyInfo key = Console.ReadKey();
@@ -44,6 +45,11 @@ namespace Student_Database
                 case ConsoleKey.D:
                     {
                         DeleteStudent();
+                        break;
+                    }
+                case ConsoleKey.P:
+                    {
+                        FindStudentsByName();
                         break;
                     }
 
@@ -111,6 +117,18 @@ namespace Student_Database
                 Console.WriteLine("Id:{0} Name:{1} SchoolNmae:{2}", student.Id, student.Name, student.SchoolName);
             }
         }
+
+        public void FindStudentsByName()
+        {
+            Console.WriteLine("Enter Name");
+            String name = Console.ReadLine();
+            List<Student> studentsByName = db.FindStudentsByName(name);
+            foreach (var student in studentsByName)
+            {
+                Console.WriteLine("Id:{0} Name:{1}", student.Id, student.Name);
+            }
+        }
+
 
         private void AddStudent()
         {

@@ -64,6 +64,20 @@ namespace Student_Database
             }
             return studentWithGivenMarks;
         }
+
+        public List<Student> FindStudentsByName(String name)
+        {
+            List<Student> studentByName = new List<Student>();
+            foreach (var iStudent in students)
+            {
+                if (iStudent.Name == name )
+                {
+                    studentByName.Add(iStudent);
+                }
+            }
+            return studentByName;
+        }
+
         public List<Student> FindStudentsByDistrict(String district)
         {
             List<Student> studentByDistrict = new List<Student>();
