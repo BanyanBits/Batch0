@@ -13,19 +13,36 @@ namespace Student_Database
         public void AddStudents(Student student)
         {
             students.Add(student);
-        } 
+        }
 
         public List<Student> PrintStudentWithHunderdMarks()
         {
             List<Student> studentWith100Marks = new List<Student>();
             foreach (var iStudent in students)
             {
-              if(iStudent.Mark1==100||iStudent.Mark2==100||iStudent.Mark3==100)
-              {
-                  studentWith100Marks.Add(iStudent);
-              }
+                if (iStudent.Mark1 == 100 || iStudent.Mark2 == 100 || iStudent.Mark3 == 100)
+                {
+                    studentWith100Marks.Add(iStudent);
+                }
             }
             return studentWith100Marks;
+        }
+
+        public int PrintStudentsWithHighestScores(int id)
+        {
+            int highestMarksOfStudent = 0;
+            foreach (var iStudent in students)
+            {
+                if (iStudent.Id == id)
+                {
+                    int total = iStudent.Mark1 + iStudent.Mark2 + iStudent.Mark3;
+                    if (total > highestMarksOfStudent)
+                    {
+                        highestMarksOfStudent = total;
+                    }
+                }
+            }
+            return highestMarksOfStudent;
         }
 
         private bool IsStudentExsit(int id)

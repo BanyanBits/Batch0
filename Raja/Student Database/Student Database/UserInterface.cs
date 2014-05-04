@@ -22,6 +22,7 @@ namespace Student_Database
             Console.WriteLine("d.Delete a Student");
             Console.WriteLine("h.Student with Hunderd Marks");
             Console.WriteLine("f.Student With Given Marks");
+            Console.WriteLine("s.Student with Highest scores");
             Console.WriteLine("q.Exit");
             Console.Write("Enter Your Choice:");
             ConsoleKeyInfo key = Console.ReadKey();
@@ -43,7 +44,7 @@ namespace Student_Database
                         DeleteStudent();
                         break;
                     }
-                
+
                 case ConsoleKey.H:
                     {
                         StudentWithHunderdMark();
@@ -52,6 +53,11 @@ namespace Student_Database
                 case ConsoleKey.F:
                     {
                         StudentWithGivenMarks();
+                        break;
+                    }
+                case ConsoleKey.S:
+                    {
+                        //StudentWithHighestScores();
                         break;
                     }
                 case ConsoleKey.Q:
@@ -108,7 +114,7 @@ namespace Student_Database
                 Console.WriteLine("Invalid Mark,Please enter the valid mark between mark<0&&mark>100");
                 return;
             }
-            Console.WriteLine("Enter  School Name");
+            Console.WriteLine("Enter School Name");
             string schoolName = Console.ReadLine();
             Console.WriteLine("Enter District");
             string district = Console.ReadLine();
@@ -129,6 +135,14 @@ namespace Student_Database
 
         }
 
+        //public void StudentWithHighestScores()
+        //{
+        //    Console.WriteLine("Enter Id");
+        //    string userInput = Console.ReadLine();
+
+        //    db.PrintStudentsWithHighestScores(userInput);
+        //}
+
         private void StudentWithHunderdMark()
         {
             List<Student> studentWith100Marks = db.PrintStudentWithHunderdMarks();
@@ -138,16 +152,24 @@ namespace Student_Database
                 foundMatchingStudent = true;
                 Console.WriteLine("Id:{0} Name:{1}", student.Id, student.Name);
             }
-            if(foundMatchingStudent==false)
-            Console.WriteLine("No one there get 100 marks  in Students ");
+            if (foundMatchingStudent == false)
+                Console.WriteLine("No one there get 100 marks  in Students ");
         }
 
         private void StudentWithGivenMarks()
         {
-            List<Student> studentWithGivenMarks = db.FindStudentWithGivenMarks(23);
+            Console.WriteLine("Enter  Mark1");
+            string userInput = Console.ReadLine();
+            int mark1;
+            if (!Int32.TryParse(userInput, out mark1))
+            {
+                Console.WriteLine("Invalid Mark1, Please enter the correct mark1 between mark1=>0 && mark1<=100");
+                return;
+            }
+            List<Student> studentWithGivenMarks = db.FindStudentWithGivenMarks(mark1);
             foreach (var student in studentWithGivenMarks)
             {
-                Console.WriteLine("Id{0} Nmae{0}",student.Id,student.Name); 
+                Console.WriteLine("Id{0} Name{0}", student.Id, student.Name);
             }
         }
 
