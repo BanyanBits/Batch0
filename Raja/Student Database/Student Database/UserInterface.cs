@@ -21,9 +21,10 @@ namespace Student_Database
             Console.WriteLine("a.Add a New Student");
             Console.WriteLine("d.Delete a Student");
             Console.WriteLine("h.Print Student with Hunderd Marks");
-            Console.WriteLine("f.Find Student With Given Marks");
-            Console.WriteLine("s.Find Student with Highest scores");
-            Console.WriteLine("n.Find Student by School Name");
+            Console.WriteLine("f.Find Students With Given Marks");
+            Console.WriteLine("s.Find Students with Highest scores");
+            Console.WriteLine("n.Find Students by School Name");
+            Console.WriteLine("b.Find Students By District");
             Console.WriteLine("q.Exit");
             Console.Write("Enter Your Choice:");
             ConsoleKeyInfo key = Console.ReadKey();
@@ -66,6 +67,11 @@ namespace Student_Database
                         FindStudentsBySchoolName();
                         break;
                     }
+                case ConsoleKey.B:
+                    {
+                        FindStudentsByDistrict();
+                        break;
+                    }
                 case ConsoleKey.Q:
                     {
                         Environment.Exit(0);
@@ -84,14 +90,25 @@ namespace Student_Database
             Console.WriteLine("Total Number Of Students in the Database:{0}", db.Count);
         }
 
+        public void FindStudentsByDistrict()
+        {
+            Console.WriteLine("Enter the District");
+            string district = Console.ReadLine();
+            List<Student> studentsByDistrict = db.FindStudentsByDistrict(district);
+            foreach (var iStudent in studentsByDistrict)
+            {
+               Console.WriteLine("Id:{0} Name:{1} District:{2}", iStudent.Id, iStudent.Name, iStudent.District); 
+            }
+        }
+
         public void FindStudentsBySchoolName()
         {
             Console.WriteLine("Enter School Name");
             String schoolName = Console.ReadLine();
-            List<Student> studentsBySchoolName=db.FindStudentsBySchoolName(schoolName);
+            List<Student> studentsBySchoolName = db.FindStudentsBySchoolName(schoolName);
             foreach (var student in studentsBySchoolName)
             {
-                Console.WriteLine("Id:{0} Name:{0}",student.Id,student.Name); 
+                Console.WriteLine("Id:{0} Name:{1} SchoolNmae:{2}", student.Id, student.Name, student.SchoolName);
             }
         }
 
@@ -152,7 +169,7 @@ namespace Student_Database
         }
 
         public void StudentWithHighestScores()
-        {       
+        {
             Console.WriteLine("Enter Id");
             string userInput = Console.ReadLine();
             int id;
@@ -161,13 +178,13 @@ namespace Student_Database
                 Console.WriteLine("Invalid id ,Please enter the valid id in positive integer");
                 return;
             }
-            Student highScoreStudents = db.FindStudentsWithHighestScores();       
+            Student highScoreStudents = db.FindStudentsWithHighestScores();
         }
 
         private void FindStudentWithHunderdMarks()
         {
             List<Student> studentWith100Marks = db.FindStudentsWithGivenMarks(100);
-            PrintStudentsList(studentWith100Marks);             
+            PrintStudentsList(studentWith100Marks);
         }
 
         private void FindStudentsWithGivenMarks()
@@ -181,21 +198,21 @@ namespace Student_Database
                 return;
             }
             List<Student> studentWithGivenMarks = db.FindStudentsWithGivenMarks(marks);
-            PrintStudentsList(studentWithGivenMarks);           
+            PrintStudentsList(studentWithGivenMarks);
         }
 
-        private  void  PrintStudentsList(List<Student> students)
+        private void PrintStudentsList(List<Student> students)
         {
-            if(students.Any()==false)
+            if (students.Any() == false)
             {
                 Console.WriteLine("No Student Found");
                 return;
             }
             foreach (var student in students)
             {
-                Console.WriteLine("Id:{0}Name:{1}Mark1:{2}Mark2:{3}Mark3:{4}",student.Id,student.Name,student.Mark1,student.Mark2,student.Mark3); 
+                Console.WriteLine("Id:{0}Name:{1}Mark1:{2}Mark2:{3}Mark3:{4}", student.Id, student.Name, student.Mark1, student.Mark2, student.Mark3);
             }
-            Console.WriteLine("Total Students:{0}",students.Count);
+            Console.WriteLine("Total Students:{0}", students.Count);
         }
 
         public void Run()
