@@ -129,7 +129,6 @@ namespace Student_Database
             }
         }
 
-
         private void AddStudent()
         {
             Console.WriteLine("Enter Id");
@@ -188,15 +187,8 @@ namespace Student_Database
 
         public void StudentWithHighestScores()
         {
-            Console.WriteLine("Enter Id");
-            string userInput = Console.ReadLine();
-            int id;
-            if (!Int32.TryParse(userInput, out id))
-            {
-                Console.WriteLine("Invalid id ,Please enter the valid id in positive integer");
-                return;
-            }
-            Student highScoreStudents = db.FindStudentsWithHighestScores();
+            Student highScoreStudents = db.FindStudentWithHighestScores();
+            Console.WriteLine("{0}",highScoreStudents);           
         }
 
         private void FindStudentWithHunderdMarks()

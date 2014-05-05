@@ -15,9 +15,9 @@ namespace Student_Database
             students.Add(student);
         }
 
-        public Student FindStudentsWithHighestScores()
+        public List<Student> FindStudentWithHighestScores()
         {
-            Student highScoreStudents = null;
+            List<Student> highScoreStudents=null;
             int highScore = 0;
             foreach (var iStudent in students)
             {
@@ -25,7 +25,7 @@ namespace Student_Database
                 if (total > highScore)
                 {
                     highScore = total;
-                    highScoreStudents = iStudent;
+                    highScoreStudents.Add(iStudent);
                 }
             }
             return highScoreStudents;
@@ -43,7 +43,7 @@ namespace Student_Database
             return false;
         }
 
-        public void DeleteStudents(int id)
+        public void DeleteStudents()
         {
             foreach (var student in students)
             {
