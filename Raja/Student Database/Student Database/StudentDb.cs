@@ -15,23 +15,22 @@ namespace Student_Database
             students.Add(student);
         }
 
-        public List<Student> FindStudentWithHighestScores()
+        public Student FindStudentWithHighestScores()
         {
-            List<Student> highScoreStudents=null;
+            Student highScoreStudents=null;
             int highScore = 0;
             foreach (var iStudent in students)
             {
-                int total = iStudent.Mark1 + iStudent.Mark2 + iStudent.Mark3;
-                if (total > highScore)
+                if (iStudent.Total > highScore)
                 {
-                    highScore = total;
-                    highScoreStudents.Add(iStudent);
+                    highScore = iStudent.Total;
+                    highScoreStudents = iStudent;
                 }
             }
             return highScoreStudents;
         }
 
-        private bool IsStudentExsit(int id)
+        public  bool IsStudentExsit(int id)
         {
             foreach (var iStudent in students)
             {
@@ -43,12 +42,15 @@ namespace Student_Database
             return false;
         }
 
-        public void DeleteStudents()
+        public void DeleteStudents(int id)
         {
             foreach (var student in students)
             {
-                students.Remove(student);
-                return;
+                if (student.Id == id)
+                {
+                    students.Remove(student);
+                    return;
+                }
             }
         }
 

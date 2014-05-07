@@ -8,18 +8,23 @@ namespace Student_Database
 {
     class UserInterface
     {
-        delegate void PrintStudentsInfo(Student student);
-        public void  delegateMethod(List<Student> students, PrintStudentsInfo PrintStudentList)
-       {
-        if(students.Any()==false)
-        {
-            Console.WriteLine("No Students Method");
-            return;
-        }
-        PrintStudentsList(students);
-       }
         StudentDb db = new StudentDb();
+        public delegate void PrintStudentsInfoDelegate(Student student);
 
+        public void PrintStudentList(List<Student> students, PrintStudentsInfoDelegate PrintStudentsInfoMethod)
+        {
+            if (students.Any() == false)
+            {
+                Console.WriteLine("No Students Method");
+                return;
+            }
+
+            foreach (var student in students)
+            {
+                PrintStudentsInfoMethod(student);   
+            }
+        }
+        
         private void DisplayMainMenu()
         {
             Console.WriteLine("");
@@ -75,7 +80,7 @@ namespace Student_Database
                     }
                 case ConsoleKey.S:
                     {
-                        StudentWithHighestScores();
+                        FindStudentWithHighestScores();
                         break;
                     }
                 case ConsoleKey.N:
@@ -111,12 +116,12 @@ namespace Student_Database
             Console.WriteLine("Enter the District");
             string district = Console.ReadLine();
             List<Student> studentsByDistrict = db.FindStudentsByDistrict(district);
-            delegateMethod(studentsByDistrict,PrintStudentsByIdNameDistrict);
+            PrintStudentList(studentsByDistrict, PrintStudentsByIdNameDistrict);
         }
 
-         private void PrintStudentsByIdNameDistrict(Student student)
+        private void PrintStudentsByIdNameDistrict(Student student)
         {
-          Console.WriteLine("Id:{0} Name:{1}",student.Id,student.Name,student.District);
+            Console.WriteLine("Id:{0} Name:{1}", student.Id, student.Name, student.District);
         }
 
         public void FindStudentsBySchoolName()
@@ -124,12 +129,12 @@ namespace Student_Database
             Console.WriteLine("Enter School Name");
             String schoolName = Console.ReadLine();
             List<Student> studentsBySchoolName = db.FindStudentsBySchoolName(schoolName);
-            delegateMethod(studentsBySchoolName, PrintStudentsByIdNameSchoolName);
+            PrintStudentList(studentsBySchoolName, PrintStudentsByIdNameSchoolName);
         }
 
         private void PrintStudentsByIdNameSchoolName(Student student)
         {
-          Console.WriteLine("Id:{0} Name:{1}",student.Id,student.Name,student.SchoolName);
+            Console.WriteLine("Id:{0} Name:{1}", student.Id, student.Name, student.SchoolName);
         }
 
         public void FindStudentsByName()
@@ -137,12 +142,12 @@ namespace Student_Database
             Console.WriteLine("Enter Name");
             String name = Console.ReadLine();
             List<Student> studentsByName = db.FindStudentsByName(name);
-            delegateMethod(studentsByName,PrintStudentsByName);
+            PrintStudentList(studentsByName, PrintStudentsByName);
         }
-         
+
         private void PrintStudentsByName(Student student)
         {
-          Console.WriteLine("Id:{0} Name:{1}",student.Id,student.Name);
+            Console.WriteLine("Id:{0} Name:{1}", student.Id, student.Name);
         }
 
         private void AddStudent()
@@ -191,7 +196,7 @@ namespace Student_Database
 
         private void DeleteStudent()
         {
-            Console.WriteLine("Enter Id");
+            Console.WriteLine("Enter Student Id:");
             string userInput = Console.ReadLine();
             int id;
             if (!Int32.TryParse(userInput, out id))
@@ -199,20 +204,36 @@ namespace Student_Database
                 Console.WriteLine("Invalid id ,Please enter the valid id in positive integer");
                 return;
             }
-            db.DeleteStudents(IsStudentsExist(id));
+            if (!db.IsStudentExsit(id))
+            {
+                Console.WriteLine("No Students Exsit With Id:{0}",id);
+                return;
+            }
+            db.DeleteStudents(id);
+            Console.WriteLine("Delete Student with Id:{0}",id);
         }
 
-        public void StudentWithHighestScores()
+        public void FindStudentWithHighestScores()
         {
-            //TODO i don't know how to print the highest scores 
-          //  Student highScoreStudents = db.FindStudentWithHighestScores();
-                
+            Student highScoreStudents = db.FindStudentWithHighestScores();
+            if(highScoreStudents==null)
+            {
+                Console.WriteLine("No Student Exist");
+                return;
+            }
+                Console.WriteLine("Student with Highest score");
+                Console.WriteLine("Id:{0}Name:{1}Total Mark:{2}",highScoreStudents.Id,highScoreStudents.Name,highScoreStudents.Total);
         }
 
         private void FindStudentWithHundredMarks()
         {
             List<Student> studentWith100Marks = db.FindStudentsWithGivenMarks(100);
-            PrintStudentsList(studentWith100Marks);
+            PrintStudentList(studentWith100Marks, PrintStudentsList);
+        }
+        
+        private void PrintStudentsList(Student student)
+        {
+            Console.WriteLine("Id:{0}Name:{1}Mark1:{2}Mark2:{3}Mark3:{4}", student.Id, student.Name, student.Mark1, student.Mark2, student.Mark3);
         }
 
         private void FindStudentsWithGivenMarks()
@@ -226,23 +247,9 @@ namespace Student_Database
                 return;
             }
             List<Student> studentWithGivenMarks = db.FindStudentsWithGivenMarks(marks);
-            PrintStudentsList(studentWithGivenMarks);
+            PrintStudentList(studentWithGivenMarks, PrintStudentsList);
         }
-
-        private void PrintStudentsList(List<Student> students)
-        {
-            if (students.Any() == false)
-            {
-                Console.WriteLine("No Student Found");
-                return;
-            }
-            foreach (var student in students)
-            {
-                Console.WriteLine("Id:{0}Name:{1}Mark1:{2}Mark2:{3}Mark3:{4}", student.Id, student.Name, student.Mark1, student.Mark2, student.Mark3);
-            }
-            Console.WriteLine("Total Students:{0}", students.Count);
-        }
-
+       
         public void Run()
         {
             while (true)

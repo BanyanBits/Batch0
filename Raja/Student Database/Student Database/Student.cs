@@ -26,5 +26,13 @@ namespace Student_Database
             this.SchoolName = schoolName;
             this.District = district;
         }
+
+        public int Total
+        {
+            get
+            {
+                return this.Mark1 + this.Mark2 + this.Mark3;
+            }
+        }
     }
 }
