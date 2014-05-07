@@ -8,6 +8,16 @@ namespace Student_Database
 {
     class UserInterface
     {
+        delegate void PrintStudentsInfo(Student student);
+        public void  delegateMethod(List<Student> students, PrintStudentsInfo PrintStudentList)
+       {
+        if(students.Any()==false)
+        {
+            Console.WriteLine("No Students Method");
+            return;
+        }
+        PrintStudentsList(students);
+       }
         StudentDb db = new StudentDb();
 
         private void DisplayMainMenu()
@@ -55,7 +65,7 @@ namespace Student_Database
 
                 case ConsoleKey.H:
                     {
-                        FindStudentWithHunderdMarks();
+                        FindStudentWithHundredMarks();
                         break;
                     }
                 case ConsoleKey.F:
@@ -101,10 +111,12 @@ namespace Student_Database
             Console.WriteLine("Enter the District");
             string district = Console.ReadLine();
             List<Student> studentsByDistrict = db.FindStudentsByDistrict(district);
-            foreach (var iStudent in studentsByDistrict)
-            {
-               Console.WriteLine("Id:{0} Name:{1} District:{2}", iStudent.Id, iStudent.Name, iStudent.District); 
-            }
+            delegateMethod(studentsByDistrict,PrintStudentsByIdNameDistrict);
+        }
+
+         private void PrintStudentsByIdNameDistrict(Student student)
+        {
+          Console.WriteLine("Id:{0} Name:{1}",student.Id,student.Name,student.District);
         }
 
         public void FindStudentsBySchoolName()
@@ -112,10 +124,12 @@ namespace Student_Database
             Console.WriteLine("Enter School Name");
             String schoolName = Console.ReadLine();
             List<Student> studentsBySchoolName = db.FindStudentsBySchoolName(schoolName);
-            foreach (var student in studentsBySchoolName)
-            {
-                Console.WriteLine("Id:{0} Name:{1} SchoolNmae:{2}", student.Id, student.Name, student.SchoolName);
-            }
+            delegateMethod(studentsBySchoolName, PrintStudentsByIdNameSchoolName);
+        }
+
+        private void PrintStudentsByIdNameSchoolName(Student student)
+        {
+          Console.WriteLine("Id:{0} Name:{1}",student.Id,student.Name,student.SchoolName);
         }
 
         public void FindStudentsByName()
@@ -123,10 +137,12 @@ namespace Student_Database
             Console.WriteLine("Enter Name");
             String name = Console.ReadLine();
             List<Student> studentsByName = db.FindStudentsByName(name);
-            foreach (var student in studentsByName)
-            {
-                Console.WriteLine("Id:{0} Name:{1}", student.Id, student.Name);
-            }
+            delegateMethod(studentsByName,PrintStudentsByName);
+        }
+         
+        private void PrintStudentsByName(Student student)
+        {
+          Console.WriteLine("Id:{0} Name:{1}",student.Id,student.Name);
         }
 
         private void AddStudent()
@@ -183,15 +199,17 @@ namespace Student_Database
                 Console.WriteLine("Invalid id ,Please enter the valid id in positive integer");
                 return;
             }
+            db.DeleteStudents(IsStudentsExist(id));
         }
 
         public void StudentWithHighestScores()
         {
-            Student highScoreStudents = db.FindStudentWithHighestScores();
-            Console.WriteLine("{0}",highScoreStudents);           
+            //TODO i don't know how to print the highest scores 
+          //  Student highScoreStudents = db.FindStudentWithHighestScores();
+                
         }
 
-        private void FindStudentWithHunderdMarks()
+        private void FindStudentWithHundredMarks()
         {
             List<Student> studentWith100Marks = db.FindStudentsWithGivenMarks(100);
             PrintStudentsList(studentWith100Marks);
