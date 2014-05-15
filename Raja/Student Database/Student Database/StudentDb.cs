@@ -10,14 +10,14 @@ namespace Student_Database
     {
         List<Student> students = new List<Student>();
 
-        public void AddStudents(Student student)
+        public void AddStudent(Student student)
         {
             students.Add(student);
         }
 
         public Student FindStudentWithHighestScores()
         {
-            Student highScoreStudents=null;
+            Student highScoreStudents = null;
             int highScore = 0;
             foreach (var iStudent in students)
             {
@@ -30,7 +30,7 @@ namespace Student_Database
             return highScoreStudents;
         }
 
-        public  bool IsStudentExsit(int id)
+        public bool IsStudentExsit(int id)
         {
             foreach (var iStudent in students)
             {
@@ -72,7 +72,7 @@ namespace Student_Database
             List<Student> studentByName = new List<Student>();
             foreach (var iStudent in students)
             {
-                if (iStudent.Name == name )
+                if (iStudent.Name == name)
                 {
                     studentByName.Add(iStudent);
                 }
@@ -93,17 +93,44 @@ namespace Student_Database
             return studentByDistrict;
         }
 
-        public List<Student>  FindStudentsBySchoolName(String schoolName)
+        public List<Student> FindStudentsBySchoolName(String schoolName)
         {
             List<Student> studentBySchoolName = new List<Student>();
             foreach (var iStudent in students)
             {
-               if(iStudent.SchoolName==schoolName)
-               {
-                   studentBySchoolName.Add(iStudent);
-               }
+                if (iStudent.SchoolName == schoolName)
+                {
+                    studentBySchoolName.Add(iStudent);
+                }
             }
             return studentBySchoolName;
+        }
+
+        public List<Student> PrintToalMarksInSorting()
+        {
+            List<Student> ascendingOrder = null;
+            foreach (var iStudent in students)
+            {
+                ascendingOrder.Add(iStudent);
+            }
+            return ascendingOrder;
+            //foreach (var iStudent in students)
+            //{
+            //    int student1InTotalMarks = iStudent.Total;
+            //    int student2InTotalMarks = iStudent.Total;
+            //    int student3InTotalMarks = iStudent.Total;
+            //    int[] ascendingOrder = new int[] { student1InTotalMarks, student2InTotalMarks, student3InTotalMarks };
+            //    Array.Sort(ascendingOrder);
+            //    foreach (var totalMarks in ascendingOrder)
+            //    {
+            //        return totalMarks;
+            //    }
+            //}
+        }
+            
+        public List<Student> GetAllStudentsList()
+        {
+            return students;
         }
 
         public int Count
