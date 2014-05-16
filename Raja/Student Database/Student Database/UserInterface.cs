@@ -44,6 +44,7 @@ namespace Student_Database
             Console.WriteLine("p.Find Students By Name");
             Console.WriteLine("o.Print Total Marks In Sorting Method");
             Console.WriteLine("t.Add 10 Test Students");
+            Console.WriteLine("u.Find  Student Top Mark In Mark1");
             Console.WriteLine("q.Exit");
             Console.Write("Enter Your Choice:");
             ConsoleKeyInfo key = Console.ReadKey();
@@ -61,6 +62,11 @@ namespace Student_Database
                         break;
                     }
 
+                case ConsoleKey.U:
+                    {
+                        FindStudentTopMarkInMark1();
+                        break;
+                    }
                 case ConsoleKey.C:
                     {
                         PrintStudentsCount();
@@ -112,11 +118,11 @@ namespace Student_Database
                         Environment.Exit(0);
                         break;
                     }
-                case ConsoleKey.O:
-                    {
-                        PrintTotalMarksInSortingMethod();
-                        break;
-                    }
+                //case ConsoleKey.O:
+                //    {
+                //        PrintTotalMarksInSortingMethod();
+                //        break;
+                //    }
 
                 default:
                     {
@@ -133,17 +139,20 @@ namespace Student_Database
 
         private void AddTestStudents()
         {
+            //TODO anna doesnot run this method
             Random random = new Random();
             int count = 10;
             int studentCount = db.Count;
-            for (int i = 1; i <=count; i++)
+            for (int i = 1; i <= count; i++)
             {
                 int studentId = studentCount + i;
                 string name = "Student" + studentId.ToString();
-                int mark1 = random.Next(100);
+                int mark1 = random.Next(90,100);
+                int mark2 = random.Next(80, 90);
+                int mark3 = random.Next(70, 90);
                 string schoolName = "School" + random.Next(10).ToString();
                 string district = "District" + random.Next(20).ToString();
-                Student student = new Student(id: studentId, name: name, mark1: random.Next(100), mark2: random.Next(100), mark3: random.Next(100),schoolName:schoolName,district:district);
+                Student student = new Student(id: studentId, name: name, mark1: random.Next(90,100), mark2: random.Next(80,90), mark3: random.Next(70,90), schoolName: schoolName, district: district);
             }
         }
 
@@ -249,6 +258,25 @@ namespace Student_Database
             Console.WriteLine("Delete Student with Id:{0}", id);
         }
 
+        private void FindStudentTopMarkInMark1()
+        {
+            
+            Student topStudentOfMark1 = db.PrintTopStudentInMark1();
+           // PrintStudentList(topStudentOfMark1, TopStudentInMark1);
+            if (topStudentOfMark1 == null)
+            {
+                Console.WriteLine("No Student Exist");
+                return;
+            }
+            Console.WriteLine("Student with High Mark1");
+            Console.WriteLine("Id:{0}Name:{1}Top Mark1:{2}", topStudentOfMark1.Id, topStudentOfMark1.Name, topStudentOfMark1.Mark1);
+        }
+
+        private void TopStudentInMark1(Student student)
+        {
+            Console.WriteLine("Id:{0} Name:{1} TopMark1:{2}", student.Id, student.Name,student.Mark1);
+        }
+
         public void FindStudentWithHighestScores()
         {
             Student highScoreStudents = db.FindStudentWithHighestScores();
@@ -286,25 +314,21 @@ namespace Student_Database
             PrintStudentList(studentWithGivenMarks, PrintStudentsList);
         }
 
-        public void PrintTotalMarksInSortingMethod()
-        {
-            List<Student> ascendingOrder = db.PrintToalMarksInSorting();
-            foreach (var iStudent in ascendingOrder)
-            {
-                Console.WriteLine("Id:{0}Name:{1}Total Mark:{2}", iStudent.Id, iStudent.Name, iStudent.Total);
-            }
-        }
+        //public void PrintTotalMarksInSortingMethod()
+        //{
+        //    db.PrintTotalMarksInSorting();
+        //}
 
         public void PrintAllStudentsList()
         {
-            List<Student> allStudents= db.GetAllStudentsList();
+            List<Student> allStudents = db.GetAllStudentsList();
             PrintStudentList(allStudents, PrintStudentInfo);
         }
 
         private void PrintStudentInfo(Student student)
         {
-            Console.WriteLine("Id:{0}\t\tName:{1}\t\tMark1:{2}\t\tMark2:{3}\t\tMark3:{4}\t\tSchoolName:{5}\t\tDistrict:{6}",student.Id,student.Name,
-                student.Mark1,student.Mark2,student.Mark3,student.SchoolName,student.District);
+            Console.WriteLine("Id:{0}\t\tName:{1}\t\tMark1:{2}\t\tMark2:{3}\t\tMark3:{4}\t\tSchoolName:{5}\t\tDistrict:{6}", student.Id, student.Name,
+                student.Mark1, student.Mark2, student.Mark3, student.SchoolName, student.District);
         }
 
         public void Run()

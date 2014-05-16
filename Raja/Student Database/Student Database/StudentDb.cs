@@ -106,28 +106,28 @@ namespace Student_Database
             return studentBySchoolName;
         }
 
-        public List<Student> PrintToalMarksInSorting()
+        //public Student PrintTotalMarksInSorting()
+        //{
+
+        //}
+
+        public Student PrintTopStudentInMark1()
         {
-            List<Student> ascendingOrder = null;
+            Student topStudentOfMark1 = null;
             foreach (var iStudent in students)
             {
-                ascendingOrder.Add(iStudent);
+                //if (iStudent.Mark1 == mark1)
+                //{
+                int temp = 0;
+                if (iStudent.Mark1 > temp)
+                {
+                    temp = iStudent.Mark1;
+                    topStudentOfMark1 = iStudent;
+                }
             }
-            return ascendingOrder;
-            //foreach (var iStudent in students)
-            //{
-            //    int student1InTotalMarks = iStudent.Total;
-            //    int student2InTotalMarks = iStudent.Total;
-            //    int student3InTotalMarks = iStudent.Total;
-            //    int[] ascendingOrder = new int[] { student1InTotalMarks, student2InTotalMarks, student3InTotalMarks };
-            //    Array.Sort(ascendingOrder);
-            //    foreach (var totalMarks in ascendingOrder)
-            //    {
-            //        return totalMarks;
-            //    }
-            //}
+            return topStudentOfMark1;
         }
-            
+
         public List<Student> GetAllStudentsList()
         {
             return students;
