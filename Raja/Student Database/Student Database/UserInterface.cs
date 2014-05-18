@@ -42,7 +42,7 @@ namespace Student_Database
             Console.WriteLine("n.Find Students by School Name");
             Console.WriteLine("b.Find Students By District");
             Console.WriteLine("p.Find Students By Name");
-            Console.WriteLine("o.Print Total Marks In Sorting Method");
+            Console.WriteLine("o.Print Sort Students By Total Mark");
             Console.WriteLine("t.Add 10 Test Students");
             Console.WriteLine("u.Find Top Student In Mark1");
             Console.WriteLine("y.Find Top Student In Mark2");
@@ -56,6 +56,11 @@ namespace Student_Database
                 case ConsoleKey.W:
                     {
                         PrintAllStudentsList();
+                        break;
+                    }
+                case ConsoleKey.O:
+                    {
+                        FindSortStudentsByTotalMark();
                         break;
                     }
                 case ConsoleKey.Y:
@@ -77,7 +82,7 @@ namespace Student_Database
 
                 case ConsoleKey.U:
                     {
-                        FindStudentTopMarkInMark1();
+                        FindTopStudentInMark1();
                         break;
                     }
                 case ConsoleKey.C:
@@ -167,52 +172,37 @@ namespace Student_Database
         {
             Console.WriteLine("Enter the District");
             string district = Console.ReadLine();
-            PrintStudentInfoDelegate printStudentsByIdNameDistrict = (Student s) =>
+            PrintStudentInfoDelegate printStudentsByIdNameDistrict = (Student student) =>
                 {
-                    Console.WriteLine("Id:{0} Name:{1}", s.Id, s.Name, s.District);
+                    Console.WriteLine("Id:{0} Name:{1}", student.Id, student.Name, student.District);
                 };
             List<Student> studentsByDistrict = db.FindStudentsByDistrict(district);
             PrintStudentList(studentsByDistrict, printStudentsByIdNameDistrict);
         }
 
-        //private void PrintStudentsByIdNameDistrict(Student student)
-        //{
-        //    Console.WriteLine("Id:{0} Name:{1}", student.Id, student.Name, student.District);
-        //}
-
         public void FindStudentsBySchoolName()
         {
             Console.WriteLine("Enter School Name");
             String schoolName = Console.ReadLine();
-            PrintStudentInfoDelegate printStudentsByIdNameSchoolName = (Student s) =>
+            PrintStudentInfoDelegate printStudentsByIdNameSchoolName = (Student student) =>
                 {
-                    Console.WriteLine("Id:{0} Name:{1}", s.Id, s.Name, s.SchoolName);
+                    Console.WriteLine("Id:{0} Name:{1}", student.Id, student.Name, student.SchoolName);
                 };
             List<Student> studentsBySchoolName = db.FindStudentsBySchoolName(schoolName);
             PrintStudentList(studentsBySchoolName, printStudentsByIdNameSchoolName);
         }
 
-        //private void PrintStudentsByIdNameSchoolName(Student student)
-        //{
-        //    Console.WriteLine("Id:{0} Name:{1}", student.Id, student.Name, student.SchoolName);
-        //}
-
         public void FindStudentsByName()
         {
             Console.WriteLine("Enter Name");
             String name = Console.ReadLine();
-            PrintStudentInfoDelegate printStudentsByName = (Student s) =>
+            PrintStudentInfoDelegate printStudentsByName = (Student student) =>
                 {
                     Console.WriteLine("Id:{0} Name:{1}", student.Id, student.Name);
                 };
             List<Student> studentsByName = db.FindStudentsByName(name);
             PrintStudentList(studentsByName, printStudentsByName);
         }
-
-        //private void PrintStudentsByName(Student student)
-        //{
-        //    Console.WriteLine("Id:{0} Name:{1}", student.Id, student.Name);
-        //}
 
         private void AddStudent()
         {
@@ -286,7 +276,7 @@ namespace Student_Database
                 return;
             }
             Console.WriteLine("Student with High Mark3");
-            Console.WriteLine("Id:{0}Name:{1}Top Mark3:{2}", topStudentOfMark3.Id, topStudentOfMark3.Name, topStudentOfMark3.Mark1);
+            Console.WriteLine("Id:{0} Name:{1} TopMark3:{2}", topStudentOfMark3.Id, topStudentOfMark3.Name, topStudentOfMark3.Mark3);
         }
 
         private void FindTopStudentInMark2()
@@ -298,10 +288,10 @@ namespace Student_Database
                 return;
             }
             Console.WriteLine("Student with High Mark2");
-            Console.WriteLine("Id:{0}Name:{1}Top Mark2:{2}", topStudentOfMark2.Id, topStudentOfMark2.Name, topStudentOfMark2.Mark1);
+            Console.WriteLine("Id:{0} Name:{1} TopMark2:{2}", topStudentOfMark2.Id, topStudentOfMark2.Name, topStudentOfMark2.Mark2);
         }
 
-        private void FindStudentTopMarkInMark1()
+        private void FindTopStudentInMark1()
         {
 
             Student topStudentOfMark1 = db.PrintTopStudentInMark1();
@@ -311,7 +301,7 @@ namespace Student_Database
                 return;
             }
             Console.WriteLine("Student with High Mark1");
-            Console.WriteLine("Id:{0}Name:{1}Top Mark1:{2}", topStudentOfMark1.Id, topStudentOfMark1.Name, topStudentOfMark1.Mark1);
+            Console.WriteLine("Id:{0} Name:{1} TopMark1:{2}", topStudentOfMark1.Id, topStudentOfMark1.Name, topStudentOfMark1.Mark1);
         }
 
         public void FindStudentWithHighestScores()
@@ -328,9 +318,9 @@ namespace Student_Database
 
         private void FindStudentWithHundredMarks()
         {
-            PrintStudentInfoDelegate printStudentsList = (Student s) =>
+            PrintStudentInfoDelegate printStudentsList = (Student student) =>
             {
-                Console.WriteLine("Id:{0}Name:{1}Mark1:{2}Mark2:{3}Mark3:{4}", s.Id, s.Name, s.Mark1, s.Mark2, s.Mark3);
+                Console.WriteLine("Id:{0}Name:{1}Mark1:{2}Mark2:{3}Mark3:{4}", student.Id, student.Name, student.Mark1, student.Mark2, student.Mark3);
             };
             List<Student> studentWith100Marks = db.FindStudentsWithGivenMarks(100);
             PrintStudentList(studentWith100Marks, printStudentsList);
@@ -346,9 +336,9 @@ namespace Student_Database
                 Console.WriteLine("Invalid Marks,Marks Should be 1=>0 && <=100");
                 return;
             }
-            PrintStudentInfoDelegate printStudentsList = (Student s) =>
+            PrintStudentInfoDelegate printStudentsList = (Student student) =>
                 {
-                    Console.WriteLine("Id:{0}Name:{1}Mark1:{2}Mark2:{3}Mark3:{4}", s.Id, s.Name, s.Mark1, s.Mark2, s.Mark3);
+                    Console.WriteLine("Id:{0}Name:{1}Mark1:{2}Mark2:{3}Mark3:{4}", student.Id, student.Name, student.Mark1, student.Mark2, student.Mark3);
                 };
             List<Student> studentWithGivenMarks = db.FindStudentsWithGivenMarks(marks);
             PrintStudentList(studentWithGivenMarks, printStudentsList);
@@ -356,13 +346,18 @@ namespace Student_Database
 
         public void PrintAllStudentsList()
         {
-            PrintStudentInfoDelegate printMethod = (Student s) =>
+            PrintStudentInfoDelegate printMethod = (Student student) =>
              {
-                 Console.WriteLine("Id:{0}\t\tName:{1}\t\tMark1:{2}\t\tMark2:{3}\t\tMark3:{4}\t\tSchoolName:{5}\t\tDistrict:{6}", s.Id, s.Name,
-                s.Mark1, s.Mark2, s.Mark3, s.SchoolName, s.District);
+                 Console.WriteLine("Id:{0}\t\tName:{1}\t\tMark1:{2}\t\tMark2:{3}\t\tMark3:{4}\t\tSchoolName:{5}\t\tDistrict:{6}", student.Id, student.Name,
+                student.Mark1, student.Mark2, student.Mark3, student.SchoolName, student.District);
              };
             List<Student> allStudents = db.GetAllStudentsList();
             PrintStudentList(allStudents, printMethod);
+        }
+         
+        public void FindSortStudentsByTotalMark()
+        {
+
         }
 
         public void Run()
