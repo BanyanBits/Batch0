@@ -140,19 +140,34 @@ namespace Student_Database
             ConsoleKeyInfo keyInfo = Console.ReadKey();
             switch (keyInfo.Key)
             {
-                case ConsoleKey.A:
+                case ConsoleKey.A:            
                     {
-                        FindTopStudent("mark1");
+                        StudentDb.GetMarksDelegateMethod GetMark1 = (Student s) =>
+                            {
+                                return s.Mark1;
+                            };
+                        Console.WriteLine("Top Student in Mark1");
+                        FindTopStudent(GetMark1);
                         break;
                     }
                 case ConsoleKey.B:
                     {
-                        FindTopStudent("mark2");
+                        StudentDb.GetMarksDelegateMethod GetMark2 = (Student s) =>
+                        {
+                            return s.Mark2;
+                        };
+                        Console.WriteLine("Top Student in Mark2");
+                        FindTopStudent(GetMark2);
                         break;
                     }
                 case ConsoleKey.C:
                     {
-                        FindTopStudent("mark3");
+                        StudentDb.GetMarksDelegateMethod GetMark3 = (Student s) =>
+                        {
+                            return s.Mark3;
+                        };
+                        Console.WriteLine("Top Student in Mark3");
+                        FindTopStudent(GetMark3);
                         break;
                     }
                 default:
@@ -284,30 +299,16 @@ namespace Student_Database
             Console.WriteLine("Delete Student with Id:{0}", id);
         }
 
-        private void FindTopStudent(string subjectName)
+        private void FindTopStudent(StudentDb.GetMarksDelegateMethod getMethod)
         {
-            Student topStudent = db.GetTopStudent(subjectName);
+            Student topStudent = db.GetTopStudent(getMethod);
             if (topStudent == null)
             {
                 Console.WriteLine("No Student Found");
                 return;
-            }
-            Console.WriteLine("TopStudent is{0}", subjectName);
-            int mark = 0;
-            if (subjectName == "mark1")
-            {
-                mark = topStudent.Mark1;
-            }
-            else if (subjectName == "mark2")
-            {
-                mark = topStudent.Mark2;
-            }
-            else if (subjectName == "mark3")
-            {
-                mark = topStudent.Mark3;
-            }
+            }           
+            int mark = getMethod(topStudent);
             Console.WriteLine("Id:{0} Name:{1} Mark:{3)", topStudent.Id, topStudent.Name, mark);
-
         }
 
         public void FindStudentWithHighestScores()

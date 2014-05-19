@@ -106,25 +106,14 @@ namespace Student_Database
             return studentBySchoolName;
         }
 
-        public Student GetTopStudent(String subjects)
+        public delegate int GetMarksDelegateMethod(Student s);
+        public Student GetTopStudent(GetMarksDelegateMethod getMethod)
         {
             Student topStudent = null;
             int temp = 0;
             foreach (var iStudent in students)
             {
-                int mark = 0;
-                if(subjects=="mark1")
-                {
-                    mark = iStudent.Mark1;
-                }
-                else if(subjects=="mark2")
-                {
-                    mark = iStudent.Mark2;
-                }
-                else if(subjects=="mark3")
-                {
-                    mark = iStudent.Mark3;
-                }
+                int mark = getMethod(iStudent);
                 if(mark>temp)
                 {
                     temp = mark;
