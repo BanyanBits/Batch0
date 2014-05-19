@@ -106,45 +106,32 @@ namespace Student_Database
             return studentBySchoolName;
         }
 
-        public Student PrintTopStudentInMark3()
+        public Student GetTopStudent(String subjects)
         {
-            Student topStudentOfMark3 = null;
-            int temp = 0;
-            foreach (var iStudent in students)
-                if (iStudent.Mark3 > temp)
-                {
-                    temp = iStudent.Mark3;
-                    topStudentOfMark3 = iStudent;
-                }
-            return topStudentOfMark3;
-        }
-
-        public Student PrintTopStudentInMark1()
-        {
-            Student topStudentOfMark1 = null;
-            int temp = 0;
-            foreach (var iStudent in students)
-                if (iStudent.Mark1 > temp)
-                {
-                    temp = iStudent.Mark1;
-                    topStudentOfMark1 = iStudent;
-                }
-            return topStudentOfMark1;
-        }
-
-        public Student PrintTopStudentInMark2()
-        {
-            Student topStudentOfMark2 = null;
+            Student topStudent = null;
             int temp = 0;
             foreach (var iStudent in students)
             {
-                if (iStudent.Mark2 > temp)
+                int mark = 0;
+                if(subjects=="mark1")
                 {
-                    temp = iStudent.Mark2;
-                    topStudentOfMark2 = iStudent;
+                    mark = iStudent.Mark1;
+                }
+                else if(subjects=="mark2")
+                {
+                    mark = iStudent.Mark2;
+                }
+                else if(subjects=="mark3")
+                {
+                    mark = iStudent.Mark3;
+                }
+                if(mark>temp)
+                {
+                    temp = mark;
+                    topStudent = iStudent;
                 }
             }
-            return topStudentOfMark2;
+            return topStudent;
         }
 
         public List<Student> GetAllStudentsList()
