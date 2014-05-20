@@ -1,0 +1,17 @@
+﻿Removed space in the project name.
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	renamed:    Student Database/Student Database.sln -> StudentDatabase/Student Database.sln
+#	renamed:    Student Database/Student Database/App.config -> StudentDatabase/Student Database/App.config
+#	renamed:    Student Database/Student Database/Program.cs -> StudentDatabase/Student Database/Program.cs
+#	renamed:    Student Database/Student Database/Properties/AssemblyInfo.cs -> StudentDatabase/Student Database/Properties/AssemblyInfo.cs
+#	renamed:    Student Database/Student Database/Student Database.csproj -> StudentDatabase/Student Database/Student Database.csproj
+#	renamed:    Student Database/Student Database/Student.cs -> StudentDatabase/Student Database/Student.cs
+#	renamed:    Student Database/Student Database/StudentDb.cs -> StudentDatabase/Student Database/StudentDb.cs
+#	renamed:    Student Database/Student Database/UserInterface.cs -> StudentDatabase/Student Database/UserInterface.cs
+#
+
