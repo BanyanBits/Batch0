@@ -10,6 +10,35 @@ namespace StudentDatabaseTest
     {
         List<Student> students = new List<Student>();
 
+        public void AddStudent(Student student)
+        {
+            students.Add(student);
+        }
+
+        public bool IsStudentExist(int id)
+        {
+            foreach (var iStudent in students)
+            {
+               if(iStudent.Id==id)
+               {
+                   return true;
+               }
+            }
+            return false;
+        }
+
+        public void DeleteStudent(int id)
+        {
+            foreach (var iStudent in students)
+            {
+                if(iStudent.Id==id)
+                {
+                    students.Remove(student);
+                    return;
+                }            
+            }
+        }
+
         public int Count
         {
             get

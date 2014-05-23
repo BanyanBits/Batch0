@@ -18,6 +18,7 @@ namespace StudentDatabaseTest
             Console.WriteLine("************************************");
             Console.WriteLine("Please Select The Option Given Below");
             Console.WriteLine("a.Print Students Count");
+            Console.WriteLine("b.Add Student");
             Console.WriteLine("q.quit");
             Console.WriteLine("Enter Your Choice");
             ConsoleKeyInfo keyInfo = Console.ReadKey();
@@ -27,6 +28,11 @@ namespace StudentDatabaseTest
                 case ConsoleKey.A:
                     {
                         PrintStudentsCount();
+                        break;
+                    }
+                case ConsoleKey.B:
+                    {
+                        AddStudent();
                         break;
                     }
                 case ConsoleKey.Q:
