@@ -26,6 +26,15 @@ namespace StudentDatabaseTest
             this.SchoolName = schoolname;
             this.District = district;
         }
+
+        public  int  Total
+        {
+            get
+            {
+                return this.Mark1 + this.Mark2 + this.Mark3;
+            }
+        }
+ 
     }
      
     

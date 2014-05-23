@@ -21,6 +21,7 @@ namespace StudentDatabaseTest
             Console.WriteLine("b.Add a new Student");
             Console.WriteLine("c.Delete a Student");
             Console.WriteLine("d.Add 10 Test Students ");
+            Console.WriteLine("e.Find Student with HighestScore");
             Console.WriteLine("q.quit");
             Console.WriteLine("Enter Your Choice");
             ConsoleKeyInfo keyInfo = Console.ReadKey();
@@ -45,6 +46,11 @@ namespace StudentDatabaseTest
                 case ConsoleKey.D:
                     {
                         AddTestStudents();
+                        break;
+                    }
+                case ConsoleKey.E:
+                    {
+                        FindStudentWithHighestScore();
                         break;
                     }
                 case ConsoleKey.Q:
@@ -145,6 +151,17 @@ namespace StudentDatabaseTest
                 Student student = new Student(id: studentId, name: name, mark1: mark1, mark2: mark2, mark3: mark3, schoolname: schoolName, district: district);
                 db.AddStudent(student);
             }
+        }
+
+        public void FindStudentWithHighestScore()
+        {
+            Student HighestScoreStudent = db.FindStudentWithHighestScore();
+            if(HighestScoreStudent==null)
+            {
+                Console.WriteLine("No Students Found");
+                return;
+            }
+            Console.WriteLine("Id:{0} Name:{1} TotalMark:{2}",HighestScoreStudent.Id,HighestScoreStudent.Name,HighestScoreStudent.Total);
         }
 
         public void Run()

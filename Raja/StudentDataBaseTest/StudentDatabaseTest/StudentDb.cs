@@ -39,6 +39,22 @@ namespace StudentDatabaseTest
             }
         }
 
+        public Student FindStudentWithHighestScore()
+        {
+            Student HighestScoreStudent = null;
+            int highScore = 0;
+            foreach (var iStudent in students)
+            {
+                if(iStudent.Total>highScore)
+                {
+                    highScore = iStudent.Total;
+                    HighestScoreStudent = iStudent;
+                }
+                
+            }
+            return HighestScoreStudent;
+        }
+
         public int Count
         {
             get
