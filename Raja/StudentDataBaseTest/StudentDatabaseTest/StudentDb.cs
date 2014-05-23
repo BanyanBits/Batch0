@@ -33,7 +33,7 @@ namespace StudentDatabaseTest
             {
                 if(iStudent.Id==id)
                 {
-                    students.Remove(student);
+                    students.Remove(iStudent);
                     return;
                 }            
             }
