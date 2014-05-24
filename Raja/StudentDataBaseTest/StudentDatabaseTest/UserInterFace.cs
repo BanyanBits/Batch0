@@ -45,6 +45,7 @@ namespace StudentDatabaseTest
             Console.WriteLine("i.Find Students By Name");
             Console.WriteLine("j.Find Students By School Name");
             Console.WriteLine("k.Find Students By District");
+            Console.WriteLine("l.Find Top Student In Subjects");
             Console.WriteLine("q.quit");
             Console.WriteLine("Enter Your Choice");
             ConsoleKeyInfo keyInfo = Console.ReadKey();
@@ -106,8 +107,11 @@ namespace StudentDatabaseTest
                         FindStudentsByDistrict();
                         break;
                     }
-
-             
+                case ConsoleKey.L:
+                    {
+                        FindTopStudentInSubjects();
+                        break;
+                    }
                 case ConsoleKey.Q:
                     {
                         Environment.Exit(0);
@@ -298,6 +302,67 @@ namespace StudentDatabaseTest
             string header = ("Id\tName\tSchoolName");
             PrintStudentList(studentsByName, printStudent, header);
         }
+
+        private void FindTopStudentInSubjects()
+        {
+            Console.WriteLine("");
+            Console.WriteLine("a.Find Top Student In Mark1");
+            Console.WriteLine("b.Find Top Student In Mark2");
+            Console.WriteLine("c.Find Top Student In Mark3");
+            ConsoleKeyInfo key = Console.ReadKey();
+            switch(key.Key)
+            {
+                case ConsoleKey.A:
+                    {
+                        StudentDb.GetMarksDelegateMethod getMark1 = (Student s) =>
+                        {
+                            return s.Mark1;
+                        };
+                        Console.WriteLine("Top Student In Mark1");
+                        FindTopStudent(getMark1);
+                        break;
+                    }
+                case ConsoleKey.B:
+                    {
+                        StudentDb.GetMarksDelegateMethod getMark2 = (Student s) =>
+                            {
+                                return s.Mark2;
+                            };
+                        Console.WriteLine("Top Student In Mark2");
+                        FindTopStudent(getMark2);
+                        break;
+                    }
+                case ConsoleKey.C:
+                    {
+                        StudentDb.GetMarksDelegateMethod getMark3 = (Student s) =>
+                        {
+                            return s.Mark3;
+                        };
+                        Console.WriteLine("Top Student In Mark3");
+                        FindTopStudent(getMark3);
+                        break;
+
+                    }
+                default:
+                    {
+                        Console.WriteLine("Invalid Input");
+                        break;
+                    }
+            }
+        }
+
+        private void FindTopStudent(StudentDb.GetMarksDelegateMethod getMethod)
+        {
+            Student topStudent = db.GetTopStudent(getMethod);
+            if(topStudent==null)
+            {
+                Console.WriteLine("No Students Found");
+                return;
+            }
+            int mark = getMethod(topStudent);
+            Console.WriteLine("Id:{0} Name:{1} Mark:{2}",topStudent.Id,topStudent.Name,mark);
+        }
+
         public void Run()
         {
             while(true)

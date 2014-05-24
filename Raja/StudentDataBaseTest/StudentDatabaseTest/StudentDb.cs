@@ -111,6 +111,22 @@ namespace StudentDatabaseTest
             return studentByDistrict;
         }
 
+        public delegate int GetMarksDelegateMethod(Student s);
+        public Student GetTopStudent(GetMarksDelegateMethod getMethod)
+        {
+            Student topStudent = null;
+            int temp = 0;
+            foreach (var iStudent in students)
+            {
+                int mark = getMethod(iStudent);
+                if(mark>temp)
+                {
+                    temp = mark;
+                    topStudent = iStudent;
+                }
+            }
+            return topStudent;
+        }
 
         public int Count
         {
