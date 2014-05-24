@@ -10,6 +10,23 @@ namespace StudentDatabaseTest
     {
         StudentDb db = new StudentDb();
 
+        delegate void PrintStudentInfoDelegate(Student student);
+
+        private void PrintStudentList(List<Student> students,PrintStudentInfoDelegate printStudentInfoMethod,string printMethod)
+        {
+            if(students.Any()==false)
+            {
+                Console.WriteLine("No Students Found");
+                return;
+            }
+            Console.WriteLine(printMethod);
+            Console.WriteLine();
+            foreach (var student in students)
+            {
+                printStudentInfoMethod(student); 
+            }
+        }
+
         private void DisplayMainMenu()
         {
             Console.WriteLine("");
@@ -20,8 +37,10 @@ namespace StudentDatabaseTest
             Console.WriteLine("a.Print Students Count");
             Console.WriteLine("b.Add a new Student");
             Console.WriteLine("c.Delete a Student");
-            Console.WriteLine("d.Add 10 Test Students ");
+            Console.WriteLine("d.Add 10 Test Students ");   
             Console.WriteLine("e.Find Student with HighestScore");
+            Console.WriteLine("f.Find Students Wiyh Hunderd Marks");
+            Console.WriteLine("g.Find Students Given Matching Marks");
             Console.WriteLine("q.quit");
             Console.WriteLine("Enter Your Choice");
             ConsoleKeyInfo keyInfo = Console.ReadKey();
@@ -51,6 +70,16 @@ namespace StudentDatabaseTest
                 case ConsoleKey.E:
                     {
                         FindStudentWithHighestScore();
+                        break;
+                    }
+                case ConsoleKey.F:
+                    {
+                        FindStudentsWithHunderdMarks();
+                        break;
+                    }
+                case ConsoleKey.G:
+                    {
+                        FindStudentsGivenMarks();
                         break;
                     }
                 case ConsoleKey.Q:
@@ -162,6 +191,36 @@ namespace StudentDatabaseTest
                 return;
             }
             Console.WriteLine("Id:{0} Name:{1} TotalMark:{2}",HighestScoreStudent.Id,HighestScoreStudent.Name,HighestScoreStudent.Total);
+        }
+
+        private void FindStudentsWithHunderdMarks()
+        {
+                PrintStudentInfoDelegate printStudent = (Student student) =>
+                {
+                    Console.WriteLine("{0}\t\t{1}\t\t{2}\t\t{3}\t\t{4}",student.Id,student.Name,student.Mark1,student.Mark2,student.Mark3);
+                };
+                List<Student> studentWith100Marks = db.FindStudentsWithGivenMarks(100);
+                string header=("Id\t\tName\t\tMark1\t\tMark2\t\tMark3");
+                PrintStudentList(studentWith100Marks,printStudent,header);
+        }
+
+        private void FindStudentsGivenMarks()
+        {
+            Console.WriteLine("Enter  the Marks");
+            int marks;
+            string userInput = Console.ReadLine();
+            if ((!Int32.TryParse(userInput, out marks)) || marks < 0 || marks > 100)
+            {
+                Console.WriteLine("InValid mark1,Please enter Mark1 Between mark1<0&&mark1>100");
+                return;
+            }
+            PrintStudentInfoDelegate printStudent = (Student student) =>
+                {
+                    Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}",student.Id,student.Name,student.Mark1,student.Mark2,student.Mark3);
+                };
+            List<Student> studentsWithGivenMarks = db.FindStudentsWithGivenMarks(marks);
+            string header = ("Id\tName\tMark1\tMark2\tMark3");
+            PrintStudentList(studentsWithGivenMarks,printStudent,header);
         }
 
         public void Run()

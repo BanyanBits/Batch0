@@ -19,10 +19,10 @@ namespace StudentDatabaseTest
         {
             foreach (var iStudent in students)
             {
-               if(iStudent.Id==id)
-               {
-                   return true;
-               }
+                if (iStudent.Id == id)
+                {
+                    return true;
+                }
             }
             return false;
         }
@@ -31,11 +31,11 @@ namespace StudentDatabaseTest
         {
             foreach (var iStudent in students)
             {
-                if(iStudent.Id==id)
+                if (iStudent.Id == id)
                 {
                     students.Remove(iStudent);
                     return;
-                }            
+                }
             }
         }
 
@@ -45,14 +45,26 @@ namespace StudentDatabaseTest
             int highScore = 0;
             foreach (var iStudent in students)
             {
-                if(iStudent.Total>highScore)
+                if (iStudent.Total > highScore)
                 {
                     highScore = iStudent.Total;
                     HighestScoreStudent = iStudent;
                 }
-                
             }
             return HighestScoreStudent;
+        }
+
+        public List<Student> FindStudentsWithGivenMarks(int marks)
+        {
+            List<Student> studentswithGivenMarks = new List<Student>();
+            foreach (var iStudent in students)
+            {
+                if(iStudent.Mark1==marks||iStudent.Mark2==marks||iStudent.Mark3 == marks)
+                {
+                    studentswithGivenMarks.Add(iStudent);
+                }
+            }
+            return studentswithGivenMarks;
         }
 
         public int Count
