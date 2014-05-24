@@ -46,6 +46,7 @@ namespace StudentDatabaseTest
             Console.WriteLine("j.Find Students By School Name");
             Console.WriteLine("k.Find Students By District");
             Console.WriteLine("l.Find Top Student In Subjects");
+            Console.WriteLine("m.Find Sort Students");
             Console.WriteLine("q.quit");
             Console.WriteLine("Enter Your Choice");
             ConsoleKeyInfo keyInfo = Console.ReadKey();
@@ -117,6 +118,11 @@ namespace StudentDatabaseTest
                         Environment.Exit(0);
                         break;
                     }
+                case ConsoleKey.M:
+                        {
+                            FindSortStudents();
+                            break;
+                        }
                 default:
                     {
                         Console.WriteLine("Invalid input,Please Select Correct Option");
@@ -314,32 +320,35 @@ namespace StudentDatabaseTest
             {
                 case ConsoleKey.A:
                     {
-                        StudentDb.GetMarksDelegateMethod getMark1 = (Student s) =>
-                        {
-                            return s.Mark1;
-                        };
-                        Console.WriteLine("Top Student In Mark1");
-                        FindTopStudent(getMark1);
+                        //StudentDb.GetMarksDelegateMethod getMark1 = (Student s) =>
+                        //{
+                        //    return s.Mark1;
+                        //};
+                        //Console.WriteLine("Top Student In Mark1");
+                        //FindTopStudent(getMark1);
+                        FindTopStudent("mark1");
                         break;
                     }
                 case ConsoleKey.B:
                     {
-                        StudentDb.GetMarksDelegateMethod getMark2 = (Student s) =>
-                            {
-                                return s.Mark2;
-                            };
-                        Console.WriteLine("Top Student In Mark2");
-                        FindTopStudent(getMark2);
+                        //StudentDb.GetMarksDelegateMethod getMark2 = (Student s) =>
+                        //    {
+                        //        return s.Mark2;
+                        //    };
+                        //Console.WriteLine("Top Student In Mark2");
+                        //FindTopStudent(getMark2);
+                        FindTopStudent("mark2");
                         break;
                     }
                 case ConsoleKey.C:
                     {
-                        StudentDb.GetMarksDelegateMethod getMark3 = (Student s) =>
-                        {
-                            return s.Mark3;
-                        };
-                        Console.WriteLine("Top Student In Mark3");
-                        FindTopStudent(getMark3);
+                        //StudentDb.GetMarksDelegateMethod getMark3 = (Student s) =>
+                        //{
+                        //    return s.Mark3;
+                        //};
+                        //Console.WriteLine("Top Student In Mark3");
+                        //FindTopStudent(getMark3);
+                        FindTopStudent("mark3");
                         break;
 
                     }
@@ -351,16 +360,175 @@ namespace StudentDatabaseTest
             }
         }
 
-        private void FindTopStudent(StudentDb.GetMarksDelegateMethod getMethod)
+        //private void FindTopStudent(StudentDb.GetMarksDelegateMethod getMethod)
+        //{
+        //    Student topStudent = db.GetTopStudent(getMethod);
+        //    if(topStudent==null)
+        //    {
+        //        Console.WriteLine("No Students Found");
+        //        return;
+        //    }
+        //    int mark = getMethod(topStudent);
+        //    Console.WriteLine("Id:{0} Name:{1} Mark:{2}",topStudent.Id,topStudent.Name,mark);
+        //}
+        private void FindTopStudent(string subjectName)
         {
-            Student topStudent = db.GetTopStudent(getMethod);
+            Student topStudent = db.GetTopStudent(subjectName);
             if(topStudent==null)
             {
-                Console.WriteLine("No Students Found");
+                Console.WriteLine("No Student Found");
                 return;
             }
-            int mark = getMethod(topStudent);
-            Console.WriteLine("Id:{0} Name:{1} Mark:{2}",topStudent.Id,topStudent.Name,mark);
+            Console.WriteLine("Top student is{0}",subjectName);
+            int mark = 0;
+            if(subjectName=="mark1")
+            {
+                mark = topStudent.Mark1;
+            }
+            else if(subjectName=="mark2")
+            {
+                mark = topStudent.Mark2;
+            }
+            else if(subjectName=="mark3")
+            {
+                mark = topStudent.Mark3;
+            }
+            Console.WriteLine("Id:{0},Name:{1},Mark:{2}",topStudent.Id,topStudent.Name,mark);
+        }
+
+        private void FindSortStudents()
+        {
+            Console.WriteLine("");
+            Console.WriteLine("a.Sort Students By Id");
+            Console.WriteLine("b.Sort Students By Name");
+            Console.WriteLine("c.Sort Students By Mark1");
+            Console.WriteLine("d.Sort Students By Mark2");
+            Console.WriteLine("e.Sort Students By Mark3");
+            Console.WriteLine("f.Sort Students By SchoolName");
+            Console.WriteLine("G.Sort Students By District");
+            ConsoleKeyInfo key = Console.ReadKey();
+            switch(key.Key)
+            {
+                case ConsoleKey.A:
+                    {
+                        FindSortStudentsById();
+                        break;
+                    }
+                case ConsoleKey.B:
+                    {
+                        FindSortStudentsByName();
+                        break;
+                    }
+                
+                case ConsoleKey.C:
+                    {
+                        FindSortStudentsByMark1();
+                        break;
+                    }
+                case ConsoleKey.D:
+                    {
+                        FindSortStudentsByMark2();
+                        break;
+                    }
+                case ConsoleKey.E:
+                    {
+                        FindSortStudentsByMark3();
+                        break;
+                    }
+                case ConsoleKey.F:
+                    {
+                        FindSortStudentsBySchoolName();
+                        break;
+                    }
+                case ConsoleKey.G:
+                    {
+                        FindSortStudentsByDistrict();
+                        break;
+                    }
+
+                default:
+                    {
+                        Console.WriteLine("Invalid Input");
+                        break;
+                    }
+            }
+        }
+
+        private void FindSortStudentsById()
+        {
+            PrintStudentInfoDelegate printStudent = (Student student) =>
+            {
+                Console.WriteLine("{0}\t{1}", student.Id, student.Name);
+            };
+            var sortStudents = db.SortStudents((a, b) => a.Id > b.Id);
+            string header = ("Id\tName");
+            PrintStudentList(sortStudents, printStudent, header);                  
+        }
+
+        private void FindSortStudentsByName()
+        {
+            PrintStudentInfoDelegate printStudent = (Student student) =>
+            {
+                Console.WriteLine("{0}\t{1}", student.Id, student.Name);
+            };
+            var sortStudents = db.SortStudents((a, b) => string.Compare(a.Name,b.Name)>0);
+            string header = ("Id\tName");
+            PrintStudentList(sortStudents, printStudent, header);
+        }
+
+        private void FindSortStudentsByMark1()
+        {
+            PrintStudentInfoDelegate printStudent = (Student student) =>
+            {
+                Console.WriteLine("{0}\t{1}\t{2}",student.Id, student.Name,student.Mark1);
+            };
+            var sortStudents = db.SortStudents((a, b) => a.Mark1>b.Mark1);
+            string header = ("Id\tName\tMark1");
+            PrintStudentList(sortStudents, printStudent, header);
+        }
+
+        private void FindSortStudentsByMark2()
+        {
+            PrintStudentInfoDelegate printStudent = (Student student) =>
+            {
+                Console.WriteLine("{0}\t{1}\t{2}", student.Id, student.Name, student.Mark2);
+            };
+            var sortStudents = db.SortStudents((a, b) => a.Mark2 > b.Mark2);
+            string header = ("Id\tName\tMark2");
+            PrintStudentList(sortStudents, printStudent, header);
+        }
+
+        private void FindSortStudentsByMark3()
+        {
+            PrintStudentInfoDelegate printStudent = (Student student) =>
+            {
+                Console.WriteLine("{0}\t{1}\t{2}", student.Id, student.Name, student.Mark3);
+            };
+            var sortStudents = db.SortStudents((a, b) => a.Mark3 > b.Mark3);
+            string header = ("Id\tName\tMark3");
+            PrintStudentList(sortStudents, printStudent, header);
+        }
+
+        private void FindSortStudentsBySchoolName()
+        {
+            PrintStudentInfoDelegate printStudent = (Student student) =>
+            {
+                Console.WriteLine("{0}\t{1}\t{2}", student.Id, student.Name,student.SchoolName);
+            };
+            var sortStudents = db.SortStudents((a, b) => string.Compare(a.SchoolName, b.SchoolName) > 0);
+            string header = ("Id\tName\tSchoolname");
+            PrintStudentList(sortStudents, printStudent, header);
+        }
+
+        private void FindSortStudentsByDistrict()
+        {
+            PrintStudentInfoDelegate printStudent = (Student student) =>
+            {
+                Console.WriteLine("{0}\t{1}\t{2}", student.Id, student.Name,student.District);
+            };
+            var sortStudents = db.SortStudents((a, b) => string.Compare(a.District, b.District) > 0);
+            string header = ("Id\tName\tDistrict");
+            PrintStudentList(sortStudents, printStudent, header);
         }
 
         public void Run()

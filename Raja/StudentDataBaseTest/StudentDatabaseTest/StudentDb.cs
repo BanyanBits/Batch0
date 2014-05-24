@@ -111,14 +111,42 @@ namespace StudentDatabaseTest
             return studentByDistrict;
         }
 
-        public delegate int GetMarksDelegateMethod(Student s);
-        public Student GetTopStudent(GetMarksDelegateMethod getMethod)
+        //public delegate int GetMarksDelegateMethod(Student s);
+        //public Student GetTopStudent(GetMarksDelegateMethod getMethod)
+        //{
+        //    Student topStudent = null;
+        //    int temp = 0;
+        //    foreach (var iStudent in students)
+        //    {
+        //        int mark = getMethod(iStudent);
+        //        if(mark>temp)
+        //        {
+        //            temp = mark;
+        //            topStudent = iStudent;
+        //        }
+        //    }
+        //    return topStudent;
+        //}
+        
+        public Student GetTopStudent(string subjects)
         {
             Student topStudent = null;
             int temp = 0;
             foreach (var iStudent in students)
             {
-                int mark = getMethod(iStudent);
+                int mark = 0;
+                if(subjects=="mark1")
+                {
+                    mark = iStudent.Mark1;
+                }
+                else if(subjects=="mark2")
+                {
+                    mark = iStudent.Mark2;
+                }
+                else if(subjects=="mark3")
+                {
+                    mark = iStudent.Mark3;
+                }
                 if(mark>temp)
                 {
                     temp = mark;
@@ -126,6 +154,32 @@ namespace StudentDatabaseTest
                 }
             }
             return topStudent;
+        }
+
+        public delegate bool IsAGreaterB(Student a, Student b);
+        public List<Student> SortStudents(IsAGreaterB compareMethod)
+        {
+            List<Student> sortStudents = new List<Student>(students);
+            while(true)
+            {
+                bool swapped = false;
+                for (int i = 0; i < sortStudents.Count-1; i++)
+                {
+                    var first = sortStudents[i];
+                    var second = sortStudents[i + 1];
+                    if(compareMethod(first,second))
+                    {
+                        sortStudents[i] = second;
+                        sortStudents[i + 1] = first;
+                        swapped = true;
+                    }
+                }
+                if(!swapped)
+                {
+                    break;
+                }
+            }
+            return sortStudents;
         }
 
         public int Count
