@@ -67,6 +67,51 @@ namespace StudentDatabaseTest
             return studentswithGivenMarks;
         }
 
+        public List<Student> AllstudentsList()
+        {
+            return students;
+        }
+
+        public List<Student> FindStudentsByName(string name)
+        {
+            List<Student> studentByName = new  List<Student>();
+            foreach (var iStudent in students)
+            {
+                if(iStudent.Name==name)
+                {
+                    studentByName.Add(iStudent);
+                }
+            }
+            return studentByName;
+        }
+
+        public List<Student> FindStudentsBySchoolName(string schoolName)
+        {
+            List<Student> studentBySchoolName = new List<Student>();
+            foreach (var iStudent in students)
+            {
+                if (iStudent.SchoolName == schoolName)
+                {
+                    studentBySchoolName.Add(iStudent);
+                }
+            }
+            return studentBySchoolName;
+        }
+
+        public List<Student> FindStudentsByDistrict(string district)
+        {
+            List<Student> studentByDistrict = new List<Student>();
+            foreach (var iStudent in students)
+            {
+                if (iStudent.District == district)
+                {
+                    studentByDistrict.Add(iStudent);
+                }
+            }
+            return studentByDistrict;
+        }
+
+
         public int Count
         {
             get

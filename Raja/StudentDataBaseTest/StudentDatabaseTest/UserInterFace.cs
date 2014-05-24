@@ -41,6 +41,10 @@ namespace StudentDatabaseTest
             Console.WriteLine("e.Find Student with HighestScore");
             Console.WriteLine("f.Find Students Wiyh Hunderd Marks");
             Console.WriteLine("g.Find Students Given Matching Marks");
+            Console.WriteLine("h.Print All Students List");
+            Console.WriteLine("i.Find Students By Name");
+            Console.WriteLine("j.Find Students By School Name");
+            Console.WriteLine("k.Find Students By District");
             Console.WriteLine("q.quit");
             Console.WriteLine("Enter Your Choice");
             ConsoleKeyInfo keyInfo = Console.ReadKey();
@@ -82,6 +86,28 @@ namespace StudentDatabaseTest
                         FindStudentsGivenMarks();
                         break;
                     }
+                case ConsoleKey .H:
+                    {
+                        PrintAllStudentsList();
+                        break;
+                    }
+                case ConsoleKey.I:
+                    {
+                        FindStudentsByName();
+                        break;
+                    }
+                case ConsoleKey.J:
+                    {
+                        FindStudentsBySchoolName();
+                        break;
+                    }
+                case ConsoleKey.K:
+                    {
+                        FindStudentsByDistrict();
+                        break;
+                    }
+
+             
                 case ConsoleKey.Q:
                     {
                         Environment.Exit(0);
@@ -168,7 +194,7 @@ namespace StudentDatabaseTest
             Random random = new Random();
             int AddedTestStudentsCount = 10;
             int studentCount = db.Count;
-            for (int i = 0; i < AddedTestStudentsCount; i++)
+            for (int i = 1; i <=AddedTestStudentsCount; i++)
             {
                 int studentId = studentCount + i;
                 string name="Student"+studentId.ToString();
@@ -223,6 +249,55 @@ namespace StudentDatabaseTest
             PrintStudentList(studentsWithGivenMarks,printStudent,header);
         }
 
+        private void PrintAllStudentsList()
+        {
+            PrintStudentInfoDelegate printStudent = (Student student) =>
+            {
+                Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}", student.Id, student.Name, student.Mark1, student.Mark2, student.Mark3,student.SchoolName,student.District);
+            };
+            List<Student> printAllStudents = db.AllstudentsList();
+            string header = ("Id\tName\tMark1\tMark2\tMark3\tSchoolName\tDistrict");
+            PrintStudentList(printAllStudents, printStudent, header);
+        }
+
+        private void FindStudentsByName()
+        {
+            Console.WriteLine("Enter the Name");
+            string name = Console.ReadLine();
+            PrintStudentInfoDelegate printStudent = (Student student) =>
+            {
+                Console.WriteLine("{0}\t{1}", student.Id, student.Name);
+            };
+            List<Student> studentsByName = db.FindStudentsByName(name);
+            string header = ("Id\tName");
+            PrintStudentList(studentsByName, printStudent, header);
+        }
+
+        private void FindStudentsBySchoolName()
+        {
+            Console.WriteLine("Enter the SchoolName");
+            string schoolName = Console.ReadLine();
+            PrintStudentInfoDelegate printStudent = (Student student) =>
+            {
+                Console.WriteLine("{0}\t{1}\t{2}", student.Id, student.Name,student.SchoolName);
+            };
+            List<Student> studentsByName = db.FindStudentsByName(schoolName);
+            string header = ("Id\tName\tSchoolName");
+            PrintStudentList(studentsByName, printStudent, header);
+        }
+
+        private void FindStudentsByDistrict()
+        {
+            Console.WriteLine("Enter the District");
+            string district = Console.ReadLine();
+            PrintStudentInfoDelegate printStudent = (Student student) =>
+            {
+                Console.WriteLine("{0}\t{1}\t{2}", student.Id, student.Name, student.SchoolName);
+            };
+            List<Student> studentsByName = db.FindStudentsByName(district);
+            string header = ("Id\tName\tSchoolName");
+            PrintStudentList(studentsByName, printStudent, header);
+        }
         public void Run()
         {
             while(true)
