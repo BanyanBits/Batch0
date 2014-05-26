@@ -10,6 +10,36 @@ namespace Student_Database
     {
         List<Student> students = new List<Student>();
 
+        public delegate bool IsAGreaterB(Student a, Student b);
+
+        public List<Student> SortStudents(IsAGreaterB compareMethod)
+        {
+            List<Student> sorted = new List<Student>(students);
+
+            while (true)
+            {
+                bool swapped = false;
+                for (int i = 0; i < sorted.Count - 1; i++)
+                {
+                    var first = sorted[i];
+                    var second = sorted[i + 1];
+                    if (compareMethod(first, second))
+                    {
+                        sorted[i] = second;
+                        sorted[i + 1] = first;
+                        swapped = true;
+                    }
+
+                    if (!swapped)
+                    {
+                        break;
+                    }
+                }
+
+                return sorted;
+            }
+        }
+
         public void AddStudent(Student student)
         {
             students.Add(student);
@@ -114,7 +144,7 @@ namespace Student_Database
             foreach (var iStudent in students)
             {
                 int mark = getMethod(iStudent);
-                if(mark>temp)
+                if (mark > temp)
                 {
                     temp = mark;
                     topStudent = iStudent;

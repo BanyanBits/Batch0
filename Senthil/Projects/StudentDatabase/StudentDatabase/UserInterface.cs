@@ -132,6 +132,13 @@ namespace Student_Database
             Console.WriteLine("Total Number Of Students in the Database:{0}", db.Count);
         }
 
+        private void SortStudentsById()
+        {
+            var sortedById = db.SortStudents((a, b) => a.Id > b.Id);
+            var sortedByName = db.SortStudents((a, b) => string.Compare(a.Name, b.Name) > 0);
+            var sortedByMark1 = db.SortStudents((a, b) => a.Mark1 > b.Mark2);
+        }
+
         private void FindTopStudentInSubjects()
         {
             Console.WriteLine("a.Find TopStudent In Mark1");
